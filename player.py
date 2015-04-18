@@ -1,7 +1,5 @@
 import pygame
 
-IMAGE_LOCATION = "player.png"
-
 
 class Shooter(pygame.sprite.Sprite):
     def __init__(self, color=(30,0,150), width=64, height=64):

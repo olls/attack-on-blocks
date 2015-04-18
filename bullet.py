@@ -1,7 +1,5 @@
 import pygame
 
-IMAGE_LOCATION = "bullet.png"
-
 
 class Bullet(pygame.sprite.Sprite):
     def __init__(self, parent):
