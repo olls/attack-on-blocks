@@ -1,4 +1,3 @@
-import os, pygame, glob
 import os, pygame, glob, logging
 
 
@@ -14,12 +13,16 @@ class Textures():
 
 	def loadTexturePack(self, packName):
 		if os.path.exists(self.path + packName):
+			self.images["TARGETS"] = []
+
 			targets = glob.glob(self.path+packName+"\\target*.png")
+			logging.debug("Found {0} target files.".format(len(targets)))
+			for file in targets:
 				fileName = file.split("\\")[-1]
-				if 
+				self.images["TARGETS"].append(filename)
+
 			self.pack = packName
 
 	def getTexture(self, objectName):
 		filename = self.path + self.pack + "\\{0}.png".format(self.images[objectName.upper()])
 		return pygame.image.load(filename)
-
