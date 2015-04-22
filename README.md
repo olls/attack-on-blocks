@@ -19,3 +19,6 @@ The game is only playable on windows, due to the GUI library only being availabl
 
 * Jake Howard
 * Furhan Bhatti
+
+# Note #
+At the moment, the game WILL NOT play at all, as it is still in development, all the time this message is here, the program will not run!
