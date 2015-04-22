@@ -1,42 +1,57 @@
 from tkinter import *
 from tkinter.ttk import *
 import logging
+import game
+PADDING_TITLE = 15
+PADDING_BUTTON = 9
 
-class Gui:
+PROGRAM_OPEN = True
+
+class Main_Window:
     def __init__(self, master):
         self.master = master
-
         self.master.title("SPACE INVADERS")
-        self.title = Label(master)
-        self.title.config(text="SPACE INVADERS!", font=("Lucida", 30))
-        self.title.pack(side="top")
 
-        self.title2 = Button(master)
-        self.title2.config(text="SPACE INVADERS!")
-        self.title2.pack(side="bottom")
+        self.title = Label(self.master)
+        self.title.config(text="SPACE INVADERS!",font=("Courier New", 37))
+        self.title.pack(side="top", padx=PADDING_BUTTON, pady=PADDING_TITLE/2)
 
-        # lbl_fname=Label(master)
-        # lbl_fname.config(text="File Name:")
-        # lbl_fname.grid(row=0, column = 0, padx=10, pady=20)
+        self.start_button = Button(self.master, style="Menu.TButton")
+        self.start_button.config(text="Play Game")
+        self.start_button.pack(fill=BOTH, ipadx=PADDING_BUTTON/2, ipady=PADDING_BUTTON/2, padx=PADDING_BUTTON, pady=PADDING_BUTTON)
+        self.start_button.bind('<Button-1>', self.play_game)
 
-        # self.txt_fname=Entry(master)
-        # self.txt_fname.grid(row=0, column=1)
+        self.exit_button = Button(self.master, style="Quit.TButton")
+        self.exit_button.config(text="Quit Game")
+        self.exit_button.pack(ipadx=PADDING_BUTTON/3, ipady=PADDING_BUTTON, padx=PADDING_BUTTON, pady=PADDING_BUTTON)
+        self.exit_button.bind('<Button-1>', self.close)
 
-        # random_button = Button(master)
-        # random_button.config(text="Play File")
-        # random_button.grid(row=3, column=3)
 
-        # random_button1 = Button(master)
-        # random_button1.config(text="Stop File")
-        # random_button1.grid(row=3, column=2)
+        Style().configure("Menu.TButton", font=("Lucida", 25 ))
+        Style().configure("Quit.TButton", font=("Lucida", 15))
+
         logging.info("GUI Generated.")
 
-def main():
+    def play_game(self, event):
+        logging.info("Game Started.")
+        self.master.withdraw()
+        game.initialise(self.master, None)
+
+    def close(self, event):
+        logging.critical("Closing Main Window.")
+        self.master.destroy()
+
+
+
+def display():
     root=Tk()
     root.resizable(width=False, height=False)
-    #root.geometry("640x480")
-    front_end=Gui(root)
+    front_end=Main_Window(root)
     root.mainloop()
 
+
+logging.basicConfig(format="%(levelname)s:%(message)s", level=logging.DEBUG)
+
+
 if __name__ == "__main__":
-    main()
+    display()
