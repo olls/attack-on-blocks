@@ -12,8 +12,8 @@ The game is only playable on windows, due to the GUI library only being availabl
 ### Playing the game ###
 
 * Clone the repository
-* Install the required libraries
-* Run 'SPACE INVADERS.py'
+* Install the required libraries (See Above)
+* Run 'Play The Game.py'
 
 ### Core Contributors ###
 
