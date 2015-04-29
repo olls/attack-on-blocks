@@ -9,7 +9,7 @@ class Bullet(pygame.sprite.Sprite):
         self.image = pygame.Surface((self.width, self.height))
         self.image.fill((255,255,255))
         self.rect = self.image.get_rect()
-        self.rect.x = parent.rect.x + 32
+        self.rect.x = parent.rect.x + parent.width/2
         self.rect.y = parent.rect.y
         self.speed = 5
         
@@ -17,4 +17,7 @@ class Bullet(pygame.sprite.Sprite):
         self.rect.x, self.rect.y = x,y
 
     def update(self):
-        self.rect.y += self.speed #direction may need editing?
+        self.rect.y -= self.speed #direction may need editing?
+
+    def at_top(self):
+        return (self.rect.y == 0)
