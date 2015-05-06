@@ -9,8 +9,10 @@ class Shooter(pygame.sprite.Sprite):
         self.image = pygame.Surface((width, height))
         self.image.fill(color)
         self.rect = self.image.get_rect()
-        self.speed = 4
+        self.speed = 3
         self.window_rect = window.get_rect()
+        self.score = 0
+        self.OP = True
         
     def set_position(self,x,y):
          self.rect.x, self.rect.y = x,y
