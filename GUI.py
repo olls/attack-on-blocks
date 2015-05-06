@@ -27,7 +27,7 @@ class Main_Window:
         self.exit_button.bind('<Button-1>', self.close)
 
 
-        Style().configure("Menu.TButton", font=("Lucida", 25 ))
+        Style().configure("Menu.TButton", font=("Lucida", 25))
         Style().configure("Quit.TButton", font=("Lucida", 15))
 
         logging.info("GUI Generated.")
@@ -35,7 +35,9 @@ class Main_Window:
     def play_game(self, event):
         logging.info("Game Started.")
         self.master.withdraw()
-        game.initialise(self.master, None)
+        exit_code = game.initialise(self.master, None)
+        if exit_code == "player collision":
+            self.title["text"] = "You Lost, Try Again?"
 
     def close(self, event):
         logging.critical("Closing Main Window.")
