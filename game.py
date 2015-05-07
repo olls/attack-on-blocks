@@ -148,10 +148,10 @@ def play(window):
 					PLAYING_GAME = False
 					for target in target_group:
 						target.image.fill((255,0,0))
-					return "player collision"
+					return "PLAYER COLLISION"
 
 			if drop_targets:
-				logging.debug("drop")
+				logging.debug("The targets are moving down a level!")
 				for target in target_group:
 					target.drop()
 
