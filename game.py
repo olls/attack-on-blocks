@@ -132,8 +132,11 @@ def play(window):
 
 			target_movement_timeout = target_movement_timeout_default
 
-
-
+		for target in target_group:
+			if target.type == "SHOOTING":
+				temp = Bullet(target)
+				temp.speed = -3 #So it shoots down!
+				bullet_group.add(temp)
 
 		update_score(window, player.score)
 		player_group.update()
