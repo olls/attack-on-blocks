@@ -164,6 +164,7 @@ def play(window):
 				bullet_group.add(temp)
 
 		update_score(window, player.score)
+		update_level(window, player.level)
 		player_group.update()
 		bullet_group.draw(window)
 		target_group.draw(window)
