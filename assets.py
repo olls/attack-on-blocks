@@ -1,4 +1,5 @@
 import os, pygame, glob, logging
+from collections import namedtuple
 
 
 class Textures():
@@ -26,3 +27,10 @@ class Textures():
 	def getTexture(self, objectName):
 		filename = self.path + self.pack + "\\{0}.png".format(self.images[objectName.upper()])
 		return pygame.image.load(filename)
+
+
+Level_Template = namedtuple('Level_Template', (rows, padding, firebacks))
+Levels = [
+	Level_Template(2, 30, 0),
+	Level_Template(3, 15, 0)
+]
