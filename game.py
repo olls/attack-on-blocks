@@ -111,9 +111,9 @@ def play(window):
 
 
 		for sprite in bullet_group:
-			if not sprite.at_top():
+			if not sprite.at_bound():
 				sprite.update()
-			if sprite.rect.y < 0:
+			if sprite.rect.y < 0 or sprite.rect.y > player.rect.y:
 				bullet_group.remove(sprite)
 
 
