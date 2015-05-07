@@ -1,9 +1,10 @@
 import pygame, logging
-
+from time import time
+from random import randint
 import bullet, player, textures
 from bullet import Bullet
 from player import Shooter
-from textures import Textures
+from assets import Textures, Levels
 from target import Target
 
 PLAYING_GAME = False
