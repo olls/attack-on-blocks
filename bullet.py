@@ -12,6 +12,7 @@ class Bullet(pygame.sprite.Sprite):
         self.rect.x = parent.rect.x + parent.width/2
         self.rect.y = parent.rect.y
         self.speed = 5
+        self.type = "TARGET"
         
     def set_position(self,x,y):
         self.rect.x, self.rect.y = x,y
