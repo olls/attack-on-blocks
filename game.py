@@ -72,7 +72,7 @@ def play(window):
 	player_group.add(player)
 	player_group.draw(window)
 
-	target_group = generate_targets()
+	target_group = generate_targets(player)
 	bullet_group = pygame.sprite.Group()
 
 	clock = pygame.time.Clock()
