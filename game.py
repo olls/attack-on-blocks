@@ -95,6 +95,8 @@ def play(window):
 				temp = Bullet(player)
 				bullet_group.add(temp)
 
+			if event.type == pygame.KEYDOWN and event.key == pygame.K_KP_PLUS:
+				player.OP = not player.OP
 
 		keys = pygame.key.get_pressed()
 		if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
