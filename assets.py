@@ -29,8 +29,9 @@ class Textures():
 		return pygame.image.load(filename)
 
 
-Level_Template = namedtuple('Level_Template', (rows, padding, firebacks))
+Level_Template = namedtuple('Level_Template', ("rows", "padding", "firebacks", "powerups"))
 Levels = [
-	Level_Template(2, 30, 0),
-	Level_Template(3, 15, 0)
+	Level_Template(2, 30, 0, 0),
+	Level_Template(3, 15, 0, 0),
+	Level_Template(3, 20, 2, 0)
 ]

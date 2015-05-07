@@ -54,12 +54,14 @@ def generate_targets(player):
 	for i in range(level.firebacks):
 		changed = False
 		while not changed:
-			if group[randint(0, len(group)-1)].type != "SHOOTER"
-				group[randint(0, len(group)-1)].type == "SHOOTER"
+			index = randint(0, len(group)-1)
+			if group[index].type != "SHOOTER"
+				group[index].type == "SHOOTER"
+				group[index].image.fill((150,0,30))
+				group[index].rect = group[image].image.get_rect()
 				changed = True
 			else:
-				group[randint(0, len(group)-1)].type != "NORMAL"
-
+				group[randint(0, len(group)-1)].type == "NORMAL"
 	return group
 		
 
