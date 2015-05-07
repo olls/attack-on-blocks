@@ -165,6 +165,7 @@ def play(window):
 
 		update_score(window, player.score)
 		update_level(window, player.level)
+		update_lives(window, player.lives)
 
 		player_group.update()
 		bullet_group.draw(window)
