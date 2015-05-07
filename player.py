@@ -13,6 +13,8 @@ class Shooter(pygame.sprite.Sprite):
         self.window_rect = window.get_rect()
         self.score = 0
         self.OP = True
+        self.level = 0
+        self.lives = 3
         
     def set_position(self,x,y):
          self.rect.x, self.rect.y = x,y
