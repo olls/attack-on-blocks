@@ -84,7 +84,6 @@ def play(window):
 		window.fill((0,0,0))
 		player_group.update()
 
-
 		for event in pygame.event.get():
 			if event.type == pygame.QUIT:
 				logging.critical("Exiting Game...")
@@ -109,17 +108,16 @@ def play(window):
 			temp = Bullet(player)
 			bullet_group.add(temp)
 
-
 		for sprite in bullet_group:
 			if not sprite.at_bound():
 				sprite.update()
 			if sprite.rect.y < 0 or sprite.rect.y > player.rect.y:
 				bullet_group.remove(sprite)
 
-
 		for bullet in bullet_group:
 			hit_list = pygame.sprite.spritecollide(bullet, target_group, True)
 			for target in hit_list:
+				if bullet.type == "TARGET": continue
 				target_group.remove(target)
 				bullet_group.remove(bullet)
 				logging.info("Hit Target!")
@@ -165,13 +163,16 @@ def play(window):
 
 		update_score(window, player.score)
 		update_level(window, player.level)
+
 		player_group.update()
 		bullet_group.draw(window)
 		target_group.draw(window)
 		player_group.draw(window)
 		pygame.display.update()
+
 		target_movement_timeout -= 1
 		clock.tick(FPS)
+
 
 if __name__ == "__main__":
 	logging.basicConfig(format="%(levelname)s:%(message)s", level=logging.DEBUG)
