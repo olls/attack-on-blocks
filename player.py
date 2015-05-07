@@ -15,6 +15,7 @@ class Shooter(pygame.sprite.Sprite):
         self.OP = True
         self.level = 0
         self.lives = 3
+        self.powerup = ""
         
     def set_position(self,x,y):
          self.rect.x, self.rect.y = x,y
