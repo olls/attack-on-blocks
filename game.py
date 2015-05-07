@@ -39,15 +39,27 @@ def initialise(menu, options):
 	return exit_code
 
 
-def generate_targets():
+def generate_targets(player):
 	group = pygame.sprite.Group()
-	for i in range(5): # Number of rows
-		i *= 25
-		for j in range(50, WINDOW_SIZE[0] - 70, 30):
-			#logging.debug("Target generated with position ({},{})".format(j,i))
+	level = Levels[player.level]
+
+	for i in range(level.rows):
+		i *= level.padding
+		for j in range(50, WINDOW_SIZE[0] - 70, level.padding):
 			temp = Target(x=j,y=i)
+			if randint(0, )
 			group.add(temp)
-			del temp			
+			del temp
+
+	for i in range(level.firebacks):
+		changed = False
+		while not changed:
+			if group[randint(0, len(group)-1)].type != "SHOOTER"
+				group[randint(0, len(group)-1)].type == "SHOOTER"
+				changed = True
+			else:
+				group[randint(0, len(group)-1)].type != "NORMAL"
+
 	return group
 		
 
