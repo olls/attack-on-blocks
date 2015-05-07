@@ -7,15 +7,23 @@ from player import Shooter
 from assets import Textures, Levels
 from target import Target
 
+
 PLAYING_GAME = False
 WINDOW_SIZE = (640,480)
 FPS = 120
 
-def rounding(x, base): return int(base * round(float(x)/base))
 
 def update_score(window, score):
 	font = pygame.font.SysFont(None, 30, bold=False)
-	window.blit(font.render("Score: {}".format(int(score)), True, (12,123,190)), (50, WINDOW_SIZE[1] - 30))
+	window.blit(font.render("Score: {}".format(int(score)), True, (255,0,0)), (25, WINDOW_SIZE[1] - 30))
+
+def update_level(window, level):
+	font = pygame.font.SysFont(None, 20, bold=True)
+	window.blit(font.render("Level: {}".format(int(level)+1), True, (0,255,0)), (8.7*WINDOW_SIZE[0]/10, WINDOW_SIZE[1] - 30))
+
+def update_lives(window, lives):
+	font = pygame.font.SysFont(None, 30, bold=False)
+	window.blit(font.render("Lives Remaining: {}".format(int(lives)), True, (0,0,255)), (4.5*WINDOW_SIZE[0]/10, WINDOW_SIZE[1] - 30))
 
 def initialise(menu, options):
 	pygame.mixer.pre_init(44100, -16, 2, 2048)
