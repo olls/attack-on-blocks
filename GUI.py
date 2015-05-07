@@ -1,11 +1,12 @@
 from tkinter import *
 from tkinter.ttk import *
+import tkMessageBox
 import logging
 import game
+
+
 PADDING_TITLE = 15
 PADDING_BUTTON = 9
-
-PROGRAM_OPEN = True
 
 class Main_Window:
     def __init__(self, master):
@@ -20,6 +21,11 @@ class Main_Window:
         self.start_button.config(text="Play Game")
         self.start_button.pack(fill=BOTH, ipadx=PADDING_BUTTON/2, ipady=PADDING_BUTTON/2, padx=PADDING_BUTTON, pady=PADDING_BUTTON)
         self.start_button.bind('<Button-1>', self.play_game)
+
+        self.start_button = Button(self.master, style="Menu.TButton")
+        self.start_button.config(text="Show Options")
+        self.start_button.pack(fill=BOTH, ipadx=PADDING_BUTTON/2, ipady=PADDING_BUTTON/2, padx=PADDING_BUTTON, pady=PADDING_BUTTON)
+        self.start_button.bind('<Button-1>', self.show_options)
 
         self.exit_button = Button(self.master, style="Quit.TButton")
         self.exit_button.config(text="Quit Game")
@@ -36,13 +42,28 @@ class Main_Window:
         logging.info("Game Started.")
         self.master.withdraw()
         exit_code = game.initialise(self.master, None)
-        if exit_code == "player collision":
-            self.title["text"] = "You Lost, Try Again?"
+        if exit_code != "QUIT": tkMessageBox.showinfo("You Lose!", exit_messages[code])
+
+    def show_options(self, event):
+        self.new_window = Toplevel(self.master)
+        self.app = Options_Window(self.new_window)
 
     def close(self, event):
         logging.critical("Closing Main Window.")
         self.master.destroy()
 
+
+class Options_Window:
+    def __init__(self, master):
+        self.master = master
+        self.master.title("SPACE INVADERS - Options")
+
+        self.title = Label(self.master)
+        self.title.config(text="OPTIONS",font=("Courier New", 37))
+        self.title.pack(side="top", padx=PADDING_BUTTON, pady=PADDING_TITLE/2)
+
+    def close(self):
+        self.master.destroy()
 
 
 def display():
@@ -51,6 +72,11 @@ def display():
     front_end=Main_Window(root)
     root.mainloop()
 
+
+exit_messages = {
+    "LIVES":"You ran out of lives!",
+    "PLAYER COLLISION":"The enemies got to you!"
+}
 
 logging.basicConfig(format="%(levelname)s:%(message)s", level=logging.DEBUG)
 
