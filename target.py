@@ -1,5 +1,6 @@
 import pygame
 
+
 class Target(pygame.sprite.Sprite):
     def __init__(self, x, y, color=(30,0,150), width=16, height=16):
         super().__init__()
@@ -10,10 +11,13 @@ class Target(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.speed = 10
         self.rect.x, self.rect.y = (x+(self.width/2)),(y+(self.width/2)) # centres co-ordinates
-
+        self.type = "NORMAL"
+        
     def move(self):
         self.rect.x += self.speed
 
     def drop(self):
         self.rect.y += 20
         self.speed *= -1
+
+
