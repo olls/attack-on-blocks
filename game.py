@@ -123,6 +123,17 @@ def play(window):
 				logging.info("Hit Target!")
 				player.score += 1
 
+			hit_list = pygame.sprite.spritecollide(bullet, player_group, True)
+			for player in hit_list:
+				if bullet.type != "TARGET" continue
+				bullet_group.remove(bullet)
+				logging.info("")
+				player.lives -= 1
+				if player.lives <= 0:
+					return "LIVES"
+
+
+			
 
 		if target_movement_timeout <=0:
 			drop_targets = False
