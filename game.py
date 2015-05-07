@@ -101,10 +101,12 @@ def play(window):
 
 		keys = pygame.key.get_pressed()
 		if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
-			player.move(player.speed)
+			if player.powerup == "SPEED": player.move(player.speed * 1.5)
+			else: player.move(player.speed)
 
 		if keys[pygame.K_LEFT] or keys[pygame.K_a]:
-			player.move(-player.speed)
+			if player.powerup == "SPEED": player.move(-player.speed*1.5)
+			else: player.move(-player.speed)
 
 		if keys[pygame.K_KP4] and keys[pygame.K_KP5] and keys[pygame.K_KP6] and player.OP:
 			temp = Bullet(player)
