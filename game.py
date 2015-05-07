@@ -136,9 +136,6 @@ def play(window):
 				if player.lives <= 0:
 					return "LIVES"
 
-
-			
-
 		if target_movement_timeout <=0:
 			drop_targets = False
 			for target in target_group:
