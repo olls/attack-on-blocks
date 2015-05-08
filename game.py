@@ -160,6 +160,7 @@ def play(window):
 
 		for target in target_group:
 			if target.type == "SHOOTING":
+				if randint(0,100) > 1: continue
 				temp = Bullet(target)
 				temp.speed = -3 #So it shoots down!
 				bullet_group.add(temp)
