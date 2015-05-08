@@ -1,6 +1,5 @@
 from tkinter import *
 from tkinter.ttk import *
-import tkMessageBox
 import logging
 import game
 
@@ -42,7 +41,7 @@ class Main_Window:
         logging.info("Game Started.")
         self.master.withdraw()
         exit_code = game.initialise(self.master, None)
-        if exit_code != "QUIT": tkMessageBox.showinfo("You Lose!", exit_messages[code])
+        if exit_code != "QUIT": self.title["text"] = exit_messages[code]
 
     def show_options(self, event):
         self.new_window = Toplevel(self.master)
