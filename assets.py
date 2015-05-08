@@ -1,6 +1,6 @@
 import os, pygame, glob, logging
 from collections import namedtuple
-
+from random import randint
 
 class Textures():
 	def __init__(self):
@@ -32,6 +32,13 @@ class Textures():
 Level_Template = namedtuple('Level_Template', ("rows", "padding", "firebacks", "powerups"))
 Levels = [
 	Level_Template(2, 30, 0, 0),
-	Level_Template(3, 15, 0, 0),
-	Level_Template(3, 20, 2, 0)
+	Level_Template(3, 15, 0, 1),
+	Level_Template(3, 20, 2, 1)
 ]
+
+def generate_random_level():
+	rows = randint(0, 12)
+	padding = randint(5, 75)
+	firebacks = randint(0, 15)
+	powerups = randint(0, 15)
+	return Level_Template(rows, padding, firebacks, powerups)
