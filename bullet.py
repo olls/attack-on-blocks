@@ -10,15 +10,13 @@ class Bullet(pygame.sprite.Sprite):
         self.image.fill((255,255,255))
         self.rect = self.image.get_rect()
         self.rect.x = parent.rect.x + parent.width/2
-        self.rect.y = parent.rect.y
+        self.rect.y = parent.rect.y + parent.width/2
         self.speed = 5
-        self.type = "TARGET"
+        self.type = "PLAYER"
+        self.parent = parent
         
     def set_position(self,x,y):
         self.rect.x, self.rect.y = x,y
 
     def update(self):
         self.rect.y -= self.speed #direction may need editing?
-
-    def at_top(self):
-        return (self.rect.y == 0)

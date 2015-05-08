@@ -2,12 +2,13 @@ import pygame
 
 
 class Shooter(pygame.sprite.Sprite):
-    def __init__(self, window, color=(30,0,150), width=50, height=25):
+    def __init__(self, window, color=(255,255,255), width=50, height=25):
         super().__init__()
         self.width = width
         self.height = height
+        self.colour = color
         self.image = pygame.Surface((width, height))
-        self.image.fill(color)
+        self.image.fill(self.colour)
         self.rect = self.image.get_rect()
         self.speed = 3
         self.window_rect = window.get_rect()
@@ -23,3 +24,7 @@ class Shooter(pygame.sprite.Sprite):
     def move(self, value): 
     	self.rect.x += value
     	self.rect.clamp_ip(self.window_rect)
+
+    def update(self):
+        self.image.fill(self.colour)
+        self.rect = self.image.get_rect()

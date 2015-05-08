@@ -9,7 +9,7 @@ class Target(pygame.sprite.Sprite):
         self.image = pygame.Surface((self.width, self.height))
         self.image.fill(color)
         self.rect = self.image.get_rect()
-        self.speed = 10
+        self.speed = 7
         self.rect.x, self.rect.y = (x+(self.width/2)),(y+(self.width/2)) # centres co-ordinates
         self.type = "NORMAL"
         
@@ -17,7 +17,7 @@ class Target(pygame.sprite.Sprite):
         self.rect.x += self.speed
 
     def drop(self):
-        self.rect.y += 20
+        self.rect.y += 17
         self.speed *= -1
 
 

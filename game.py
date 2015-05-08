@@ -1,7 +1,6 @@
 import pygame, logging
 from time import time
 from random import randint
-import bullet, player, textures
 from bullet import Bullet
 from player import Shooter
 from assets import Textures, Levels, generate_random_level
@@ -56,10 +55,8 @@ def generate_targets(player):
 		changed = False
 		while not changed:
 			index = randint(0, len(group)-1)
-			if group[index].type != "SHOOTER"
+			if group[index].type != "SHOOTER":
 				group[index].type == "SHOOTER"
-				group[index].image.fill((150,0,30))
-				group[index].rect = group[image].image.get_rect()
 				changed = True
 			else:
 				group[randint(0, len(group)-1)].type == "NORMAL"
@@ -84,9 +81,8 @@ def play(window):
 	target_movement_timeout = target_movement_timeout_default
 
 	while PLAYING_GAME:
-		window.fill((0,0,0))
-		player_group.update()
-
+		window.fill((13,123,123))
+		
 		for event in pygame.event.get():
 			if event.type == pygame.QUIT:
 				logging.critical("Exiting Game...")
@@ -114,9 +110,8 @@ def play(window):
 			bullet_group.add(temp)
 
 		for sprite in bullet_group:
-			if not sprite.at_bound():
-				sprite.update()
-			if sprite.rect.y < 0 or sprite.rect.y > player.rect.y:
+			sprite.update()
+			if sprite.rect.y < 0 or (sprite.rect.y > player.rect.y and sprite.type == "TARGET"):
 				bullet_group.remove(sprite)
 
 		for bullet in bullet_group:
@@ -130,7 +125,7 @@ def play(window):
 
 			hit_list = pygame.sprite.spritecollide(bullet, player_group, True)
 			for player in hit_list:
-				if bullet.type != "TARGET" continue
+				if bullet.type != "TARGET": continue
 				bullet_group.remove(bullet)
 				logging.info("")
 				player.lives -= 1
@@ -141,7 +136,7 @@ def play(window):
 			drop_targets = False
 			for target in target_group:
 				target.move()
-				if target.rect.x <= 20 or target.rect.x >=WINDOW_SIZE[0] - 20 + target.width:
+				if target.rect.x <= 30 or target.rect.x >=WINDOW_SIZE[0] - 30:
 					drop_targets = True
 
 				if target.rect.y >= player.rect.y + 10:
@@ -168,10 +163,9 @@ def play(window):
 		update_level(window, player.level)
 		update_lives(window, player.lives)
 
-		player_group.update()
+		player_group.draw(window)
 		bullet_group.draw(window)
 		target_group.draw(window)
-		player_group.draw(window)
 		pygame.display.update()
 
 		target_movement_timeout -= 1
