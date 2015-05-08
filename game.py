@@ -49,7 +49,6 @@ def generate_targets(player):
 		i *= level.padding
 		for j in range(50, WINDOW_SIZE[0] - 70, level.padding):
 			temp = Target(x=j,y=i)
-			if randint(0, )
 			group.add(temp)
 			del temp
 
