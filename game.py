@@ -4,7 +4,7 @@ from random import randint
 import bullet, player, textures
 from bullet import Bullet
 from player import Shooter
-from assets import Textures, Levels
+from assets import Textures, Levels, generate_random_level
 from target import Target
 
 
@@ -41,7 +41,9 @@ def initialise(menu, options):
 
 def generate_targets(player):
 	group = pygame.sprite.Group()
-	level = Levels[player.level]
+	if player.level > len(Levels)-1:
+		level = generate_random_level()
+	else: level = Levels[player.level]
 
 	for i in range(level.rows):
 		i *= level.padding
