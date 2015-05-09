@@ -7,6 +7,7 @@ import game
 PADDING_TITLE = 15
 PADDING_BUTTON = 9
 
+
 class Main_Window:
     def __init__(self, master):
         self.master = master
@@ -40,12 +41,12 @@ class Main_Window:
     def play_game(self, event):
         logging.info("Game Started.")
         self.master.withdraw()
-        exit_code = game.initialise(self.master, None)
+        exit_code = game.initialise(self.master, self.options_window.options)
         if exit_code != "QUIT": self.title["text"] = exit_messages[code]
 
     def show_options(self, event):
         self.new_window = Toplevel(self.master)
-        self.app = Options_Window(self.new_window)
+        self.options_window = Options_Window(self.new_window)
 
     def close(self, event):
         logging.critical("Closing Main Window.")
@@ -61,6 +62,9 @@ class Options_Window:
         self.title.config(text="OPTIONS",font=("Courier New", 37))
         self.title.pack(side="top", padx=PADDING_BUTTON, pady=PADDING_TITLE/2)
 
+        self.options = {
+            "":""
+        }
     def close(self):
         self.master.destroy()
 
