@@ -81,7 +81,7 @@ def play(window):
 	target_movement_timeout = target_movement_timeout_default
 
 	while PLAYING_GAME:
-		window.fill((13,123,123))
+		window.fill((0,0,0))
 		
 		for event in pygame.event.get():
 			if event.type == pygame.QUIT:
@@ -120,7 +120,7 @@ def play(window):
 				if bullet.type == "TARGET": continue
 				target_group.remove(target)
 				bullet_group.remove(bullet)
-				logging.info("Hit Target!")
+				logging.debug("Hit Target!")
 				player.score += 1
 
 			hit_list = pygame.sprite.spritecollide(bullet, player_group, True)
