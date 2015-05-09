@@ -31,14 +31,13 @@ def initialise(menu, options):
 
 	exit_code = play(window) # Run main game loop
 
-	if exit_code == "QUIT":
-		pygame.quit()
-
+	pygame.quit()
 	menu.deiconify()
 	return exit_code
 
 
 def generate_targets(player):
+	sprite_list = []
 	group = pygame.sprite.Group()
 	if player.level > len(Levels)-1:
 		level = generate_random_level()
@@ -48,16 +47,24 @@ def generate_targets(player):
 		i *= level.padding
 		for j in range(50, WINDOW_SIZE[0] - 70, level.padding):
 			temp = Target(x=j,y=i)
-			group.add(temp)
+			sprite_list.append(temp)
 			del temp
 
 	for i in range(level.firebacks):
 		changed = False
 		while not changed:
-			index = randint(0, len(group)-1)
-			if group[index].type != "SHOOTER":
-				group[index].type == "SHOOTER"
+			index = randint(0, len(sprite_list)-1)
+			if sprite_list[index].type != "SHOOTER":
+				sprite_list[index].type = "SHOOTER"
+				sprite_list[index].image.fill((0,255,0))
+				x,y = sprite_list[index].rect.x, sprite_list[index].rect.y
+				sprite_list[index].rect = sprite_list[index].image.get_rect()
+				sprite_list[index].set_position(x,y, center=False)
+				logging.debug("There's a shooter in the map!")
 				changed = True
+
+	for sprite in sprite_list: #Because sprite groups dont support indexing!
+		group.add(sprite)
 	return group
 		
 
@@ -68,15 +75,16 @@ def play(window):
 	player.set_position(WINDOW_SIZE[0]/2, WINDOW_SIZE[1]*0.83)
 	player_group = pygame.sprite.Group()
 	player_group.add(player)
-	player_group.draw(window)
 
 	target_group = generate_targets(player)
 	bullet_group = pygame.sprite.Group()
 
 	clock = pygame.time.Clock()
-	target_movement_timeout_default = FPS * 0.5
-	target_movement_timeout = target_movement_timeout_default
-	
+
+	timeouts = {
+		"Target Movement":[FPS*0.5,FPS*0.5]
+	}
+
 	logging.info("Game Started.")
 	PLAYING_GAME = True
 	while PLAYING_GAME:
@@ -114,34 +122,32 @@ def play(window):
 				bullet_group.remove(sprite)
 
 		for bullet in bullet_group:
-			hit_list = pygame.sprite.spritecollide(bullet, target_group, True)
+			hit_list = pygame.sprite.spritecollide(bullet, target_group, False)
 			for target in hit_list:
-				if bullet.type == "TARGET": continue
-				target_group.remove(target)
-				bullet_group.remove(bullet)
-				logging.debug("Hit Target!")
-				player.score += 1
+				if bullet.type != "TARGET":
+					target_group.remove(target)
+					bullet_group.remove(bullet)
+					logging.debug("Hit Target!")
+					player.score += 1
 
-			hit_list = pygame.sprite.spritecollide(bullet, player_group, True)
+			hit_list = pygame.sprite.spritecollide(bullet, player_group, False)
 			for player in hit_list:
-				if bullet.type != "TARGET": continue
-				bullet_group.remove(bullet)
-				logging.info("")
-				player.lives -= 1
-				if player.lives <= 0:
-					return "LIVES"
-
-		if target_movement_timeout <=0:
+				if bullet.type == "TARGET":
+					bullet_group.remove(bullet)
+					logging.info("")
+					player.lives -= 1
+					if player.lives <= 0:
+						return "LIVES"
+		print(timeouts["Target Movement"][0])
+		if timeouts["Target Movement"][0] <=0:
 			drop_targets = False
 			for target in target_group:
 				target.move()
 				if target.rect.x <= 30 or target.rect.x >=WINDOW_SIZE[0] - 30:
 					drop_targets = True
 
-				if target.rect.y >= player.rect.y + 10:
+				if target.rect.y >= player.rect.y + 20:
 					PLAYING_GAME = False
-					for target in target_group:
-						target.image.fill((255,0,0))
 					return "PLAYER COLLISION"
 
 			if drop_targets:
@@ -149,14 +155,16 @@ def play(window):
 				for target in target_group:
 					target.drop()
 
-			target_movement_timeout = target_movement_timeout_default
+			timeouts["Target Movement"][0] = timeouts["Target Movement"][1]
 
 		for target in target_group:
-			if target.type == "SHOOTING":
-				if randint(0,100) > 1: continue
+			if target.type == "SHOOTER":
+				if randint(0,350) > 1: continue
 				temp = Bullet(target)
+				temp.type="TARGET"
 				temp.speed = -3 #So it shoots down!
 				bullet_group.add(temp)
+				logging.info("A shot was fired by an enemy.")
 
 		update_score(window, player.score)
 		update_level(window, player.level)
@@ -167,7 +175,10 @@ def play(window):
 		target_group.draw(window)
 		pygame.display.update()
 
-		target_movement_timeout -= 1
+		for i in range(len(timeouts)):
+			timeouts[i][0] -= 1
+			print("subtract")
+
 		clock.tick(FPS)
 
 
