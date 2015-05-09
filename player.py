@@ -2,7 +2,7 @@ import pygame
 
 
 class Shooter(pygame.sprite.Sprite):
-    def __init__(self, window, color=(255,255,255), width=50, height=25):
+    def __init__(self, window, color=(255,255,255), width=45, height=20):
         super().__init__()
         self.width = width
         self.height = height
@@ -12,12 +12,13 @@ class Shooter(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.speed = 3
         self.window_rect = window.get_rect()
+
         self.score = 0
-        self.OP = True
+        self.OP = False
         self.level = 0
         self.lives = 3
-        self.powerup = ""
-        
+        self.powerup = ""    
+
     def set_position(self,x,y):
          self.rect.x, self.rect.y = x,y
          
