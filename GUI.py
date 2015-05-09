@@ -35,16 +35,17 @@ class Main_Window:
         Style().configure("Menu.TButton", font=("Lucida", 25))
         Style().configure("Quit.TButton", font=("Lucida", 15))
 
+        self.options_window = Options_Window()
         logging.debug("GUI Generated.")
 
     def play_game(self, event):
         self.master.withdraw()
         exit_code = game.initialise(self.master, self.options_window.options)
-        if exit_code != "QUIT": self.title["text"] = exit_messages[code]
+        if exit_code != "QUIT": self.title["text"] = exit_messages[exit_code]
 
     def show_options(self, event):
         self.new_window = Toplevel(self.master)
-        self.options_window = Options_Window(self.new_window)
+        self.options_window.display(self.new_window)
 
     def close(self, event):
         logging.critical("Closing Main Window.")
@@ -52,7 +53,12 @@ class Main_Window:
 
 
 class Options_Window:
-    def __init__(self, master):
+    def __init__(self):
+        self.options = {
+            "":""
+        }
+
+    def display(self, master):
         self.master = master
         self.master.title("SPACE INVADERS - Options")
 
@@ -60,9 +66,6 @@ class Options_Window:
         self.title.config(text="OPTIONS",font=("Courier New", 37))
         self.title.pack(side="top", padx=PADDING_BUTTON, pady=PADDING_TITLE/2)
 
-        self.options = {
-            "":""
-        }
     def close(self):
         self.master.destroy()
 
