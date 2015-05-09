@@ -20,4 +20,10 @@ class Target(pygame.sprite.Sprite):
         self.rect.y += 17
         self.speed *= -1
 
+    def set_position(self, x, y, center=False):
+        if center:
+            self.rect.x, self.rect.y = (x+(self.width/2)),(y+(self.width/2))
+        else:
+            self.rect.x, self.rect.y = x, y
+
 
