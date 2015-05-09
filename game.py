@@ -58,8 +58,6 @@ def generate_targets(player):
 			if group[index].type != "SHOOTER":
 				group[index].type == "SHOOTER"
 				changed = True
-			else:
-				group[randint(0, len(group)-1)].type == "NORMAL"
 	return group
 		
 
@@ -76,11 +74,11 @@ def play(window):
 	bullet_group = pygame.sprite.Group()
 
 	clock = pygame.time.Clock()
-	PLAYING_GAME = True
 	target_movement_timeout_default = FPS * 0.5
 	target_movement_timeout = target_movement_timeout_default
 	
 	logging.info("Game Started.")
+	PLAYING_GAME = True
 	while PLAYING_GAME:
 		window.fill((0,0,0))
 		
