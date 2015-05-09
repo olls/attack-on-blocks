@@ -32,14 +32,12 @@ class Main_Window:
         self.exit_button.pack(ipadx=PADDING_BUTTON/3, ipady=PADDING_BUTTON, padx=PADDING_BUTTON, pady=PADDING_BUTTON)
         self.exit_button.bind('<Button-1>', self.close)
 
-
         Style().configure("Menu.TButton", font=("Lucida", 25))
         Style().configure("Quit.TButton", font=("Lucida", 15))
 
-        logging.info("GUI Generated.")
+        logging.debug("GUI Generated.")
 
     def play_game(self, event):
-        logging.info("Game Started.")
         self.master.withdraw()
         exit_code = game.initialise(self.master, self.options_window.options)
         if exit_code != "QUIT": self.title["text"] = exit_messages[code]

@@ -79,7 +79,8 @@ def play(window):
 	PLAYING_GAME = True
 	target_movement_timeout_default = FPS * 0.5
 	target_movement_timeout = target_movement_timeout_default
-
+	
+	logging.info("Game Started.")
 	while PLAYING_GAME:
 		window.fill((0,0,0))
 		
