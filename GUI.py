@@ -55,7 +55,7 @@ class Main_Window:
 class Options_Window:
     def __init__(self):
         self.options = {
-            "":""
+            "Difficulty": 120
         }
 
     def display(self, master):
@@ -64,10 +64,34 @@ class Options_Window:
 
         self.title = Label(self.master)
         self.title.config(text="OPTIONS",font=("Courier New", 37))
-        self.title.pack(side="top", padx=PADDING_BUTTON, pady=PADDING_TITLE/2)
+        self.title.pack(side="top", padx=PADDING_TITLE, pady=PADDING_TITLE/2)
 
+        self.difficulty_title = Label(self.master)
+        self.difficulty_title.config(text="Current Difficulty: {}".format(self.options["Difficulty"]), font=("Courier New", 19))
+        self.difficulty_title.pack(ipadx=PADDING_BUTTON/3, padx=PADDING_BUTTON)
+
+        self.difficulty_scale = Scale(self.master, from_=30, to=300, orient="horizontal", command=self.update_difficulty, length=400)
+        self.difficulty_scale.pack(ipadx=PADDING_BUTTON/3, padx=PADDING_BUTTON/3)
+
+        self.exit_button = Button(self.master, style="Minor.TButton")
+        self.exit_button.config(text="Reset")
+        self.exit_button.pack(ipadx=PADDING_BUTTON/3, padx=PADDING_BUTTON/3)
+        self.exit_button.bind('<Button-1>', self.reset_difficulty)
+
+        Style().configure("Minor.TButton", font=("Lucida", 10))
+        logging.info("Options menu created.")
+        
     def close(self):
         self.master.destroy()
+
+    def update_difficulty(self, event):
+        self.options["Difficulty"] = int(self.difficulty_scale.get())
+        self.difficulty_title["text"] = "Current Difficulty: {}".format(self.options["Difficulty"])
+
+    def reset_difficulty(self, event):
+        self.options["Difficulty"] = 120
+        self.difficulty_title["text"] = "Current Difficulty: {}".format(self.options["Difficulty"])
+        self.difficulty_scale["value"] = 120
 
 
 def display():
