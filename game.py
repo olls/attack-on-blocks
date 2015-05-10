@@ -1,9 +1,10 @@
 import pygame, logging
-from time import time
+from time import time, sleep
 from random import randint
+import eggs
 from bullet import Bullet
 from player import Shooter
-from assets import Textures, Levels, generate_random_level
+from assets import *
 from target import Target
 
 
@@ -17,7 +18,7 @@ def update_score(window, score):
 	window.blit(font.render("Score: {}".format(int(score)), True, (255,0,0)), (25, WINDOW_SIZE[1] - 30))
 
 def update_level(window, level):
-	font = pygame.font.SysFont(None, 20, bold=True)
+	font = pygame.font.SysFont(None, 25, bold=True)
 	window.blit(font.render("Level: {}".format(int(level)+1), True, (0,255,0)), (8.7*WINDOW_SIZE[0]/10, WINDOW_SIZE[1] - 30))
 
 def update_lives(window, lives):
@@ -27,9 +28,16 @@ def update_lives(window, lives):
 def initialise(menu, options):
 	pygame.mixer.pre_init(44100, -16, 2, 2048)
 	pygame.init()
+	init_sounds()
 	window = pygame.display.set_mode(WINDOW_SIZE)
 
 	exit_code = play(window) # Run main game loop
+	
+	for key, value in Sounds.items():
+		value.stop()
+
+	logging.debug("Game Exited with code {}".format(exit_code))
+	if exit_code != "QUIT": sleep(1)
 
 	pygame.quit()
 	menu.deiconify()
@@ -42,10 +50,10 @@ def generate_targets(player):
 	if player.level > len(Levels)-1:
 		level = generate_random_level()
 	else: level = Levels[player.level]
-
+	logging.debug("Level Information: " + str(level))
 	for i in range(level.rows):
-		i *= level.padding
-		for j in range(50, WINDOW_SIZE[0] - 70, level.padding):
+		i *= level.padding + 8
+		for j in range(40, WINDOW_SIZE[0] - 40, level.padding + 8):
 			temp = Target(x=j,y=i)
 			sprite_list.append(temp)
 			del temp
@@ -60,7 +68,7 @@ def generate_targets(player):
 				x,y = sprite_list[index].rect.x, sprite_list[index].rect.y
 				sprite_list[index].rect = sprite_list[index].image.get_rect()
 				sprite_list[index].set_position(x,y, center=False)
-				logging.debug("There's a shooter in the map!")
+				#logging.debug("There's a shooter in the map!")
 				changed = True
 
 	for sprite in sprite_list: #Because sprite groups dont support indexing!
@@ -82,8 +90,10 @@ def play(window):
 	clock = pygame.time.Clock()
 
 	timeouts = {
-		"Target Movement":[FPS*0.5,FPS*0.5]
+		"Target Movement":[FPS*0.5,FPS*0.5], 
+		"Powerup":[FPS*100, FPS*100]
 	}
+	Sounds["main"].play(loops=-1)
 
 	logging.info("Game Started.")
 	PLAYING_GAME = True
@@ -102,6 +112,7 @@ def play(window):
 
 			if event.type == pygame.KEYDOWN and event.key == pygame.K_KP_PLUS:
 				player.OP = not player.OP
+				logging.info("Player is now OP!")
 
 		keys = pygame.key.get_pressed()
 		if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
@@ -115,6 +126,8 @@ def play(window):
 		if keys[pygame.K_KP4] and keys[pygame.K_KP5] and keys[pygame.K_KP6] and player.OP:
 			temp = Bullet(player)
 			bullet_group.add(temp)
+		if keys[pygame.K_r] and [pygame.K_9] and [pygame.K_k] and player.OP:
+			eggs.r9k(window)
 
 		for sprite in bullet_group:
 			sprite.update()
@@ -127,18 +140,17 @@ def play(window):
 				if bullet.type != "TARGET":
 					target_group.remove(target)
 					bullet_group.remove(bullet)
-					logging.debug("Hit Target!")
 					player.score += 1
 
 			hit_list = pygame.sprite.spritecollide(bullet, player_group, False)
 			for player in hit_list:
 				if bullet.type == "TARGET":
 					bullet_group.remove(bullet)
-					logging.info("")
+					logging.info("You were hit by a target's bullet!")
 					player.lives -= 1
 					if player.lives <= 0:
 						return "LIVES"
-		print(timeouts["Target Movement"][0])
+
 		if timeouts["Target Movement"][0] <=0:
 			drop_targets = False
 			for target in target_group:
@@ -159,26 +171,34 @@ def play(window):
 
 		for target in target_group:
 			if target.type == "SHOOTER":
-				if randint(0,350) > 1: continue
+				if randint(0,400) > 1: continue
 				temp = Bullet(target)
 				temp.type="TARGET"
 				temp.speed = -3 #So it shoots down!
 				bullet_group.add(temp)
-				logging.info("A shot was fired by an enemy.")
+
+		if len(target_group) == 0:
+			player.level += 1
+			target_group = generate_targets(player)
+			player.change_colour(player.colours[player.level])
+			pygame.display.update()
+			sleep(1.5)
+
+		if player.OP:
+			player.change_colour((255,96,0))
 
 		update_score(window, player.score)
 		update_level(window, player.level)
 		update_lives(window, player.lives)
 
-		player_group.draw(window)
 		bullet_group.draw(window)
 		target_group.draw(window)
+		player_group.draw(window)
+
+		for key, value in timeouts.items():
+			value[0] -= 1
+
 		pygame.display.update()
-
-		for i in range(len(timeouts)):
-			timeouts[i][0] -= 1
-			print("subtract")
-
 		clock.tick(FPS)
 
 
