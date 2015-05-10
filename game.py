@@ -29,10 +29,10 @@ def initialise(menu, options):
 	pygame.mixer.pre_init(44100, -16, 2, 2048)
 	pygame.init()
 	init_sounds()
+	options["Difficulty"] = FPS
 	window = pygame.display.set_mode(WINDOW_SIZE)
 
 	exit_code = play(window) # Run main game loop
-	
 	for key, value in Sounds.items():
 		value.stop()
 
