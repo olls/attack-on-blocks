@@ -9,8 +9,8 @@ class Bullet(pygame.sprite.Sprite):
         self.image = pygame.Surface((self.width, self.height))
         self.image.fill((255,255,255))
         self.rect = self.image.get_rect()
-        self.rect.x = parent.rect.x + parent.width/2
-        self.rect.y = parent.rect.y + parent.width/2
+        self.rect.x = parent.rect.x + parent.width/2 - self.width/2
+        self.rect.y = parent.rect.y + parent.height/2
         self.speed = 5
         self.type = "PLAYER"
         self.parent = parent
