@@ -2,11 +2,11 @@ import pygame
 
 
 class Shooter(pygame.sprite.Sprite):
-    def __init__(self, window, color=(255,255,255), width=45, height=20):
+    def __init__(self, window, colour=(255,255,255), width=45, height=20):
         super().__init__()
         self.width = width
         self.height = height
-        self.colour = color
+        self.colour = colour
         self.image = pygame.Surface((width, height))
         self.image.fill(self.colour)
         self.rect = self.image.get_rect()
@@ -17,7 +17,8 @@ class Shooter(pygame.sprite.Sprite):
         self.OP = False
         self.level = 0
         self.lives = 3
-        self.powerup = ""    
+        self.powerup = ""
+        self.colours = [(255,0,0), (255,255,0), (0,255,0)]   
 
     def set_position(self,x,y):
          self.rect.x, self.rect.y = x,y
@@ -29,3 +30,9 @@ class Shooter(pygame.sprite.Sprite):
     def update(self):
         self.image.fill(self.colour)
         self.rect = self.image.get_rect()
+
+    def change_colour(self, colour):
+        x,y = self.rect.x, self.rect.y
+        self.image.fill(colour)
+        self.rect = self.image.get_rect()
+        self.set_position(x,y)
