@@ -31,15 +31,25 @@ class Textures():
 
 Level_Template = namedtuple('Level_Template', ("rows", "padding", "firebacks", "powerups"))
 Levels = [
-	Level_Template(4, 30, 3, 0),
-	Level_Template(3, 15, 0, 1),
-	Level_Template(3, 20, 2, 1)
+	Level_Template(2, 20, 0, 0),
+	Level_Template(3, 15, 2, 1),
+	Level_Template(4, 25, 7, 1)
 ]
+
 
 def generate_random_level():
 	logging.info("Generating a random level!")
 	rows = randint(0, 12)
-	padding = randint(5, 75)
+	padding = randint(0, 30)
 	firebacks = randint(0, 15)
 	powerups = randint(0, 15)
 	return Level_Template(rows, padding, firebacks, powerups)
+
+Sounds = {}
+def init_sounds():
+	music_files = ["main.mp3", "fire.mp3"]
+	for file in music_files:
+		path = os.path.dirname(os.path.realpath(__file__)) + "\\resources\\sounds\\" + file
+		if file == "main.mp3": mixer = pygame.mixer.music.load(path)
+		else: mixer = pygame.mixer.Sound(file)
+		Sounds.update(file.split(".")[0], mixer)
