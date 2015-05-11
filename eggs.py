@@ -8,6 +8,6 @@ def r9k(window):
 	image = pygame.transform.scale(pygame.image.load(image_file), window.get_size())
 	window.blit(image, (0,0))
 	font = pygame.font.SysFont(None, 30, bold=False)
-	window.blit(font.render("A rare pepe has been found. Alert R9k", True, (0,0,0)), (window.get_width()/2-150, window.get_height()/2))
+	window.blit(font.render("A rare pepe has been found. Alert R9k", True, (0,0,0)), (window.get_width()/2-175, window.get_height()/2))
 	pygame.display.update()
-	sleep(5)
+	sleep(9)
