@@ -32,7 +32,7 @@ def initialise(menu, options):
 	options["Difficulty"] = FPS
 	window = pygame.display.set_mode(WINDOW_SIZE)
 
-	exit_code = play(window) # Run main game loop
+	exit_code = play(window, options) # Run main game loop
 	for key, value in Sounds.items():
 		value.stop()
 
@@ -50,11 +50,12 @@ def generate_targets(player):
 	if player.level > len(Levels)-1:
 		level = generate_random_level()
 	else: level = Levels[player.level]
-	logging.debug("Level Information: " + str(level))
+	logging.debug("Generating Level: " + str(level))
+
 	for i in range(level.rows):
 		i *= level.padding + 8
 		for j in range(40, WINDOW_SIZE[0] - 40, level.padding + 8):
-			temp = Target(x=j,y=i)
+			temp = Target(x=j,y=i, player.options["Textures"])
 			sprite_list.append(temp)
 			del temp
 
@@ -67,8 +68,7 @@ def generate_targets(player):
 				sprite_list[index].image = pygame.transform.scale(player.options["Textures"].get_texture("SHOOTER"), (sprite_list[index].width, sprite_list[index].height))
 				x,y = sprite_list[index].rect.x, sprite_list[index].rect.y
 				sprite_list[index].rect = sprite_list[index].image.get_rect()
-				sprite_list[index].set_position(x,y, center=False)
-				#logging.debug("There's a shooter in the map!")
+				sprite_list[index].set_position(x,y, center=False) #Already Centered!
 				changed = True
 
 	for sprite in sprite_list: #Because sprite groups dont support indexing!
@@ -76,11 +76,12 @@ def generate_targets(player):
 	return group
 		
 
-def play(window):
+def play(window, options):
 	window_rect = window.get_rect()
 
 	player = Shooter(window=window)
 	player.set_position(WINDOW_SIZE[0]/2, WINDOW_SIZE[1]*0.83)
+	player.options = options
 	player_group = pygame.sprite.Group()
 	player_group.add(player)
 
