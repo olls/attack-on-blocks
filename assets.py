@@ -25,6 +25,7 @@ class Textures():
 				self.images["TARGETS"].append(filename)
 
 			self.pack = packName
+		else: logging.warn("Cannot find texture pack '{}'".format(packName))
 
 	def get_texture(self, objectName):
 		filename = self.path + self.pack + "\\{0}.png".format(self.images[objectName.upper()])
@@ -33,6 +34,10 @@ class Textures():
 	def get_target_texture(self):
 		filename = self.path + self.pack + "\\{}.png".format(self.images["TARGETS"][randint(0,len(self.images["TARGETS"]))])
 		return pygame.image.load(filename)
+
+	def list_packs(self):
+		return [x[0] for x in os.walk(self.path)]
+
 
 
 Level_Template = namedtuple('Level_Template', ("rows", "padding", "firebacks", "powerups"))
@@ -50,6 +55,7 @@ def generate_random_level():
 	firebacks = randint(0, 15)
 	powerups = randint(0, 15)
 	return Level_Template(rows, padding, firebacks, powerups)
+
 
 Sounds = {}
 def init_sounds():
