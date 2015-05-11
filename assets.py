@@ -14,7 +14,7 @@ class Textures():
 		self.path=os.path.dirname(os.path.realpath(__file__)) + "\\resources\\texture_packs\\"
 		self.pack = "default"
 
-	def loadTexturePack(self, packName):
+	def load_texture_pack(self, packName):
 		if os.path.exists(self.path + packName):
 			self.images["TARGETS"] = []
 
@@ -26,7 +26,7 @@ class Textures():
 
 			self.pack = packName
 
-	def getTexture(self, objectName):
+	def get_texture(self, objectName):
 		filename = self.path + self.pack + "\\{0}.png".format(self.images[objectName.upper()])
 		return pygame.image.load(filename)
 
