@@ -22,10 +22,10 @@ class Main_Window:
         self.start_button.pack(fill=BOTH, ipadx=PADDING_BUTTON/2, ipady=PADDING_BUTTON/2, padx=PADDING_BUTTON, pady=PADDING_BUTTON)
         self.start_button.bind('<Button-1>', self.play_game)
 
-        self.start_button = Button(self.master, style="Menu.TButton")
-        self.start_button.config(text="Show Options")
-        self.start_button.pack(fill=BOTH, ipadx=PADDING_BUTTON/2, ipady=PADDING_BUTTON/2, padx=PADDING_BUTTON, pady=PADDING_BUTTON)
-        self.start_button.bind('<Button-1>', self.show_options)
+        self.options_button = Button(self.master, style="Menu.TButton")
+        self.options_button.config(text="Show Options")
+        self.options_button.pack(fill=BOTH, ipadx=PADDING_BUTTON/2, ipady=PADDING_BUTTON/2, padx=PADDING_BUTTON, pady=PADDING_BUTTON)
+        self.options_button.bind('<Button-1>', self.show_options)
 
         self.exit_button = Button(self.master, style="Quit.TButton")
         self.exit_button.config(text="Quit Game")
