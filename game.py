@@ -64,7 +64,7 @@ def generate_targets(player):
 			index = randint(0, len(sprite_list)-1)
 			if sprite_list[index].type != "SHOOTER":
 				sprite_list[index].type = "SHOOTER"
-				sprite_list[index].image.fill((0,255,0))
+				sprite_list[index].image = pygame.transform.scale(player.options["Textures"].get_texture("SHOOTER"), (sprite_list[index].width, sprite_list[index].height))
 				x,y = sprite_list[index].rect.x, sprite_list[index].rect.y
 				sprite_list[index].rect = sprite_list[index].image.get_rect()
 				sprite_list[index].set_position(x,y, center=False)
@@ -175,6 +175,10 @@ def play(window):
 				if randint(0,375) > 1: continue
 				temp = Bullet(target)
 				temp.type="TARGET"
+				temp.image = pygame.transform.scale(textures.get_texture("TARGET_BULLET"), (temp.width, temp.height))
+				x,y = temp.rect.x, temp.rect.y
+				temp.rect = temp.image.get_rect()
+				temp.set_position(x,y)
 				temp.speed = -3 #So it shoots down!
 				bullet_group.add(temp)
 

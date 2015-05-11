@@ -2,13 +2,12 @@ import pygame
 
 
 class Shooter(pygame.sprite.Sprite):
-    def __init__(self, window, colour=(255,255,255), width=45, height=20):
+    def __init__(self, window, texture, colour=(255,255,255), width=45, height=20):
         super().__init__()
         self.width = width
         self.height = height
         self.colour = colour
-        self.image = pygame.Surface((width, height))
-        self.image.fill(self.colour)
+        self.image = pygame.transform.scale(textures.get_texture("PLAYER"), (self.width, self.height))
         self.rect = self.image.get_rect()
         self.speed = 3
         self.window_rect = window.get_rect()

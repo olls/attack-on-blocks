@@ -7,7 +7,9 @@ class Textures():
 		self.images = {
 			"PLAYER":"player.png",
 			"BULLET":"bullet.png",
-			"TARGETS":[]
+			"TARGETS":[],
+			"SHOOTER":"shooter.png",
+			"TARGET_BULLET":"target_bullet.png"
 		}
 		self.path=os.path.dirname(os.path.realpath(__file__)) + "\\resources\\texture_packs\\"
 		self.pack = "default"
@@ -26,6 +28,10 @@ class Textures():
 
 	def getTexture(self, objectName):
 		filename = self.path + self.pack + "\\{0}.png".format(self.images[objectName.upper()])
+		return pygame.image.load(filename)
+
+	def get_target_texture(self):
+		filename = self.path + self.pack + "\\{}.png".format(self.images["TARGETS"][randint(0,len(self.images["TARGETS"]))])
 		return pygame.image.load(filename)
 
 

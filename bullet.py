@@ -6,8 +6,7 @@ class Bullet(pygame.sprite.Sprite):
         super().__init__()
         self.width = 4
         self.height = 10
-        self.image = pygame.Surface((self.width, self.height))
-        self.image.fill((255,255,255))
+        self.image = pygame.transform.scale(textures.get_texture("BULLET"), (self.width, self.height))
         self.rect = self.image.get_rect()
         self.rect.x = parent.rect.x + parent.width/2 - self.width/2
         self.rect.y = parent.rect.y + parent.height/2
