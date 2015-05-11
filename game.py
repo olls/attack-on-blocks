@@ -126,6 +126,7 @@ def play(window):
 		if keys[pygame.K_KP4] and keys[pygame.K_KP5] and keys[pygame.K_KP6] and player.OP:
 			temp = Bullet(player)
 			bullet_group.add(temp)
+
 		if keys[pygame.K_r] and [pygame.K_9] and [pygame.K_k] and player.OP:
 			eggs.r9k(window)
 
@@ -171,7 +172,7 @@ def play(window):
 
 		for target in target_group:
 			if target.type == "SHOOTER":
-				if randint(0,400) > 1: continue
+				if randint(0,375) > 1: continue
 				temp = Bullet(target)
 				temp.type="TARGET"
 				temp.speed = -3 #So it shoots down!
@@ -181,6 +182,7 @@ def play(window):
 			player.level += 1
 			target_group = generate_targets(player)
 			player.change_colour(player.colours[player.level])
+			target_group.draw()
 			pygame.display.update()
 			sleep(1.5)
 
