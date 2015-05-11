@@ -71,9 +71,16 @@ class Options_Window:
         self.difficulty_title = Label(self.master)
         self.difficulty_title.config(text="Current Difficulty: {}".format(self.options["Difficulty"]), font=("Courier New", 19))
         self.difficulty_title.pack(ipadx=PADDING_BUTTON/3, padx=PADDING_BUTTON)
-
         self.difficulty_scale = Scale(self.master, from_=30, to=300, orient="horizontal", command=self.update_difficulty, length=400)
         self.difficulty_scale.pack(ipadx=PADDING_BUTTON/3, padx=PADDING_BUTTON/3)
+
+        self.texture_title = Label(self.master)
+        self.texture_title.config(text="Select Texture Pack", font=("Courier New", 19))
+        self.texture_title.pack(side="bottom", ipadx=PADDING_BUTTON/3, padx=PADDING_BUTTON)
+        self.texture_select = ListBox(master)
+        for directory in self.options["Textures"].list_packs():
+        	self.texture_select.insert(END, directory)
+        self.texture_select.pack(ipadx=PADDING_BUTTON/3, padx=PADDING_BUTTON/3)
 
         self.exit_button = Button(self.master, style="Minor.TButton")
         self.exit_button.config(text="Reset")
@@ -81,9 +88,11 @@ class Options_Window:
         self.exit_button.bind('<Button-1>', self.reset_difficulty)
 
         Style().configure("Minor.TButton", font=("Lucida", 10))
+        self.dlgWin.protocol('WM_DELETE_WINDOW', self.close)
         logging.info("Options menu created.")
         
     def close(self):
+    	self.options["Textures"].pack = self.texture_select.get(ACTIVE) # Because it has no changed event
         self.master.destroy()
 
     def update_difficulty(self, event):
