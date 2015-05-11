@@ -93,7 +93,7 @@ def play(window):
 		"Target Movement":[FPS*0.5,FPS*0.5], 
 		"Powerup":[FPS*100, FPS*100]
 	}
-	Sounds["main"].play(loops=-1)
+	Sounds["main"].play(loops=-1) #Start background music
 
 	logging.info("Game Started.")
 	PLAYING_GAME = True
@@ -177,7 +177,7 @@ def play(window):
 				temp.speed = -3 #So it shoots down!
 				bullet_group.add(temp)
 
-		if len(target_group) == 0:
+		if len(target_group) == 0: #If all current players are gone.
 			player.level += 1
 			target_group = generate_targets(player)
 			player.change_colour(player.colours[player.level])
@@ -185,7 +185,7 @@ def play(window):
 			sleep(1.5)
 
 		if player.OP:
-			player.change_colour((255,96,0))
+			player.change_colour((255,96,0)) #override colour change if changed before
 
 		update_score(window, player.score)
 		update_level(window, player.level)
