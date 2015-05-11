@@ -54,10 +54,10 @@ class Main_Window:
 
 class Options_Window:
     def __init__(self):
-    	self.textures = Textures()
+    	self.textures_object = Textures()
         self.options = {
             "Difficulty": 120,
-            "Textures": self.textures
+            "Textures": self.textures_object
         }
 
     def display(self, master):
