@@ -200,8 +200,3 @@ def play(window):
 
 		pygame.display.update()
 		clock.tick(FPS)
-
-
-if __name__ == "__main__":
-	logging.basicConfig(format="%(levelname)s:%(message)s", level=logging.DEBUG)
-	initialise(None, None)
