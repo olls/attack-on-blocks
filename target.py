@@ -9,7 +9,7 @@ class Target(pygame.sprite.Sprite):
         self.height = height
         self.image = pygame.transform.scale(textures.get_target_texture(), (self.width, self.height))
         self.rect = self.image.get_rect()
-        self.speed = 7
+        self.speed = 5
         self.rect.x, self.rect.y = (x+(self.width/2)),(y+(self.width/2)) # centres co-ordinates
         self.type = "NORMAL"
         
@@ -17,7 +17,7 @@ class Target(pygame.sprite.Sprite):
         self.rect.x += self.speed
 
     def drop(self):
-        self.rect.y += 17
+        self.rect.y += 13
         self.speed *= -1
 
     def set_position(self, x, y, center=False):
