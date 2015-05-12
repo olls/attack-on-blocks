@@ -54,7 +54,7 @@ def generate_targets(player):
 
     for i in range(level.rows):
         i *= level.padding + 8
-        for j in range(40, WINDOW_SIZE[0] - 40, level.padding + 8):
+        for j in range(40, WINDOW_SIZE[0] - 40, level.padding + 10):
             temp = Target(x=j,y=i, textures=player.options["Textures"])
             sprite_list.append(temp)
             del temp
