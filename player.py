@@ -19,11 +19,11 @@ class Shooter(pygame.sprite.Sprite):
         self.powerup = "" 
 
     def set_position(self,x,y):
-         self.rect.x, self.rect.y = x,y
+         self.rect.x, self.rect.y = x, y
          
     def move(self, value): 
-    	self.rect.x += value
-    	self.rect.clamp_ip(self.window_rect)
+        self.rect.x += value
+        self.rect.clamp_ip(self.window_rect)
 
     def update(self):
         self.image.fill(self.colour)
