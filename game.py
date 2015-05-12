@@ -58,9 +58,11 @@ def generate_targets(player):
             temp = Target(x=j,y=i, textures=player.options["Textures"])
             sprite_list.append(temp)
             del temp
-    if len(sprite_list) > level.firebacks:
-        level.firebacks = len(sprite_list)
-    for i in range(level.firebacks):
+
+    if len(sprite_list) < level.firebacks:
+        firebacks = len(sprite_list)
+    else: firebacks = level.firebacks
+    for i in range(firebacks):
         changed = False
         while not changed:
             index = randint(0, len(sprite_list)-1) if (len(sprite_list) - 1 != 0) else 0
@@ -177,14 +179,14 @@ def play(window, options):
 
         for target in target_group:
             if target.type == "SHOOTER":
-                if randint(0,375) > 1: continue
+                if randint(0,600) > 1: continue
                 temp = Bullet(target, player.options["Textures"])
                 temp.type="TARGET"
                 temp.image = pygame.transform.scale(player.options["Textures"].get_texture("TARGET_BULLET"), (temp.width, temp.height))
                 x,y = temp.rect.x, temp.rect.y
                 temp.rect = temp.image.get_rect()
                 temp.set_position(x,y)
-                temp.speed = -3 #So it shoots down!
+                temp.speed = -1 #So it shoots down!
                 bullet_group.add(temp)
 
         if len(target_group) == 0: #If all current players are gone.
