@@ -9,7 +9,7 @@ from target import Target, generate_targets
 
 
 PLAYING_GAME = False
-WINDOW_SIZE = (640,480)
+WINDOW_SIZE = (680, 790)
 
 
 def update_score(window, score):
