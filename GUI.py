@@ -55,7 +55,7 @@ class Main_Window:
 
     def show_info(self, event):
         logging.info("Loading About Page...")
-        system("https://bitbucket.org/theorangeone/space-invaders/wiki/Home")
+        system("start https://bitbucket.org/theorangeone/space-invaders/wiki/Home")
 
     def close(self, event):
         logging.critical("Closing Main Window.")
