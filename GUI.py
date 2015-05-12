@@ -28,9 +28,9 @@ class Main_Window:
         self.options_button.pack(fill=BOTH, ipadx=PADDING_BUTTON/2, ipady=PADDING_BUTTON/2, padx=PADDING_BUTTON, pady=PADDING_BUTTON)
         self.options_button.bind('<Button-1>', self.show_options)
 
-        self.help_button = Button(self.master, style="Menu.TButton")
+        self.help_button = Button(self.master, style="About.TButton")
         self.help_button.config(text="About / Help")
-        self.help_button.pack(ipadx=PADDING_BUTTON/3, ipady=PADDING_BUTTON, padx=PADDING_BUTTON, pady=PADDING_BUTTON)
+        self.help_button.pack(fill=BOTH, ipadx=PADDING_BUTTON/4, ipady=PADDING_BUTTON/4, padx=PADDING_BUTTON, pady=PADDING_BUTTON)
         self.help_button.bind('<Button-1>', self.show_info)
 
         self.exit_button = Button(self.master, style="Quit.TButton")
@@ -39,6 +39,7 @@ class Main_Window:
         self.exit_button.bind('<Button-1>', self.close)
 
         Style().configure("Menu.TButton", font=("Lucida", 21))
+        Style().configure("About.TButton", font=("Lucida", 13))
         Style().configure("Quit.TButton", font=("Lucida", 13))
 
         self.options_window = Options_Window()
