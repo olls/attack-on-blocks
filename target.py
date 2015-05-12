@@ -3,7 +3,7 @@ from random import randint
 
 
 class Target(pygame.sprite.Sprite):
-    def __init__(self, x, y, textures, color=(30,0,150), width=16, height=16):
+    def __init__(self, x, y, textures, color=(30,0,150), width=23, height=23):
         super().__init__()
         self.width = width
         self.height = height

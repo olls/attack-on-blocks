@@ -2,7 +2,7 @@ import pygame
 
 
 class Shooter(pygame.sprite.Sprite):
-    def __init__(self, window, texture, colour=(255,255,255), width=45, height=20):
+    def __init__(self, window, texture, colour=(255,255,255), width=55, height=25):
         super().__init__()
         self.width = width
         self.height = height
