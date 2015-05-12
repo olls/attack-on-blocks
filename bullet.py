@@ -2,7 +2,7 @@ import pygame
 
 
 class Bullet(pygame.sprite.Sprite):
-    def __init__(self, parent):
+    def __init__(self, parent, textures):
         super().__init__()
         self.width = 4
         self.height = 10
