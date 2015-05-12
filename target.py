@@ -27,3 +27,37 @@ class Target(pygame.sprite.Sprite):
             self.rect.x, self.rect.y = x, y
 
 
+def generate_targets(player, window_size, Levels):
+    sprite_list = []
+    group = pygame.sprite.Group()
+    if player.level > len(Levels)-1:
+        level = generate_random_level()
+    else: level = Levels[player.level]
+    logging.debug("Generating Level: " + str(level))
+
+    for i in range(level.rows):
+        i *= level.padding + 8
+        for j in range(75, window_size[0] - 75, level.padding + 10):
+            temp = Target(x=j,y=i, textures=player.options["Textures"])
+            sprite_list.append(temp)
+            del temp
+
+    if len(sprite_list) < level.firebacks:
+        firebacks = len(sprite_list)
+    else: firebacks = level.firebacks
+    for i in range(firebacks):
+        changed = False
+        while not changed:
+            index = randint(0, len(sprite_list)-1) if (len(sprite_list) - 1 != 0) else 0
+            if sprite_list[index].type != "SHOOTER":
+                sprite_list[index].type = "SHOOTER"
+                sprite_list[index].image = pygame.transform.scale(player.options["Textures"].get_texture("SHOOTER"), (sprite_list[index].width, sprite_list[index].height))
+                x,y = sprite_list[index].rect.x, sprite_list[index].rect.y
+                sprite_list[index].rect = sprite_list[index].image.get_rect()
+                sprite_list[index].set_position(x,y, center=False) #Already Centered!
+                changed = True
+
+    for sprite in sprite_list: #Because sprite groups dont support indexing!
+        group.add(sprite)
+    return group
+        
