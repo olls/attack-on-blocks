@@ -45,7 +45,7 @@ def play(window, options):
     window_rect = window.get_rect()
     options["Textures"].load_texture_pack(options["Textures"].pack)
     player = Shooter(window=window, texture=options["Textures"])
-    player.set_position(WINDOW_SIZE[0]/2, WINDOW_SIZE[1]*0.83)
+    player.set_position(WINDOW_SIZE[0]/2, WINDOW_SIZE[1]*0.90)
     player.options = options
     player_group = pygame.sprite.Group()
     player_group.add(player)
@@ -129,10 +129,10 @@ def play(window, options):
             drop_targets = False
             for target in target_group:
                 target.move()
-                if target.rect.x <= 30 or target.rect.x >=WINDOW_SIZE[0] - 30:
+                if target.rect.x <= 30 or target.rect.x >=WINDOW_SIZE[0] - target.width/2 - 30:
                     drop_targets = True
 
-                if target.rect.y >= player.rect.y + 35:
+                if target.rect.y >= player.rect.y + target.height/2:
                     PLAYING_GAME = False
                     return "PLAYER COLLISION"
 
