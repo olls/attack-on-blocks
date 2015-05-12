@@ -68,16 +68,18 @@ def play(window, options):
     while PLAYING_GAME:
         window.fill((0,0,0))
         
+        fired = False
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 logging.critical("Exiting Game...")
                 PLAYING_GAME = False
                 return "QUIT"
 
-            if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
+            if event.type == pygame.KEYDOWN and event.key in [pygame.K_SPACE, pygame.K_w, pygame.K_UP] and not fired:
                 if not player.options["Sounds"]: Sounds["shot"].play()
                 temp = Bullet(player, player.options["Textures"])
                 bullet_group.add(temp)
+                fired = True
 
             if event.type == pygame.KEYDOWN and event.key == pygame.K_KP_PLUS:
                 if not player.options["Sounds"] or not player.OP: 
