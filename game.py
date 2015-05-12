@@ -5,7 +5,7 @@ import eggs
 from bullet import Bullet
 from player import Shooter
 from assets import *
-from target import Target
+from target import Target, generate_targets
 
 
 PLAYING_GAME = False

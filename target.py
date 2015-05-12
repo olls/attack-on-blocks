@@ -1,4 +1,4 @@
-import pygame
+import pygame, logging
 from random import randint
 
 
