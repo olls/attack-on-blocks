@@ -10,7 +10,6 @@ from target import Target
 
 PLAYING_GAME = False
 WINDOW_SIZE = (640,480)
-FPS = 120
 
 
 def update_score(window, score):
@@ -29,7 +28,6 @@ def initialise(menu, options):
     pygame.mixer.pre_init(44100, -16, 2, 2048)
     pygame.init()
     init_sounds()
-    options["Difficulty"] = FPS
     window = pygame.display.set_mode(WINDOW_SIZE)
 
     exit_code = play(window, options) # Run main game loop
@@ -92,6 +90,7 @@ def play(window, options):
     bullet_group = pygame.sprite.Group()
 
     clock = pygame.time.Clock()
+    FPS = player.options["Difficulty"]
 
     timeouts = {
         "Target Movement":[FPS*0.5,FPS*0.5], 
