@@ -169,8 +169,8 @@ def play(window, options):
         update_level(window, player.level)
         update_lives(window, player.lives)
 
-        bullet_group.draw(window)
         target_group.draw(window)
+        bullet_group.draw(window)
         player_group.draw(window)
 
         for key, value in timeouts.items():
