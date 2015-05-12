@@ -6,7 +6,7 @@ This take on space invaders was written for my IT BTEC course, Unit 21 Games Dev
 
 * Python
 * Pygame
-* TKinter
+* TKinter 
 The game is only playable on windows, due to the GUI library only being available on windows. However a cross platform, lightweight version may be made in the future.
 
 ### Playing the game ###
@@ -18,7 +18,7 @@ The game is only playable on windows, due to the GUI library only being availabl
 ### Core Contributors ###
 
 * Jake Howard
-* Furhan Bhatti
+* Furhan Bhatti (Well not really)
 
 # Note #
 At the moment, the game WILL NOT play at all, as it is still in development, all the time this message is here, the program will not run!
