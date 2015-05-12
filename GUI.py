@@ -2,7 +2,7 @@ from tkinter import *
 from tkinter.ttk import *
 import logging
 import game
-
+from assets import Textures
 
 PADDING_TITLE = 15
 PADDING_BUTTON = 9
@@ -54,7 +54,7 @@ class Main_Window:
 
 class Options_Window:
     def __init__(self):
-    	self.textures_object = Textures()
+        self.textures_object = Textures()
         self.options = {
             "Difficulty": 120,
             "Textures": self.textures_object
@@ -76,23 +76,26 @@ class Options_Window:
 
         self.texture_title = Label(self.master)
         self.texture_title.config(text="Select Texture Pack", font=("Courier New", 19))
-        self.texture_title.pack(side="bottom", ipadx=PADDING_BUTTON/3, padx=PADDING_BUTTON)
-        self.texture_select = ListBox(master)
-        for directory in self.options["Textures"].list_packs():
-        	self.texture_select.insert(END, directory)
-        self.texture_select.pack(ipadx=PADDING_BUTTON/3, padx=PADDING_BUTTON/3)
-
+        self.texture_title.pack(ipadx=PADDING_BUTTON/3, padx=PADDING_BUTTON)
         self.exit_button = Button(self.master, style="Minor.TButton")
         self.exit_button.config(text="Reset")
         self.exit_button.pack(ipadx=PADDING_BUTTON/3, padx=PADDING_BUTTON/3)
         self.exit_button.bind('<Button-1>', self.reset_difficulty)
 
+        self.texture_select = Listbox(master)
+        self.texture_select.delete(0, END)
+        for directory in self.options["Textures"].list_packs():
+            self.texture_select.insert(END, directory)
+        self.texture_select.pack(ipadx=PADDING_BUTTON/3, padx=PADDING_BUTTON/3)
+        self.reset_difficulty(None)
+
         Style().configure("Minor.TButton", font=("Lucida", 10))
-        self.dlgWin.protocol('WM_DELETE_WINDOW', self.close)
+        self.master.protocol('WM_DELETE_WINDOW', self.close)
         logging.info("Options menu created.")
         
     def close(self):
-    	self.options["Textures"].pack = self.texture_select.get(ACTIVE) # Because it has no changed event
+        self.options["Textures"].pack = self.texture_select.get(ACTIVE) if self.texture_select.get(ACTIVE) != "" else "default" # Because it has no changed event
+        logging.info("Selected Texture Pack: {}".format(self.options["Textures"].pack))
         self.master.destroy()
 
     def update_difficulty(self, event):
