@@ -68,7 +68,8 @@ class Options_Window:
         self.textures_object = Textures()
         self.options = {
             "Difficulty": 120,
-            "Textures": self.textures_object
+            "Textures": self.textures_object,
+            "Sounds": True
         }
 
     def display(self, master):
@@ -102,14 +103,24 @@ class Options_Window:
             self.texture_select.insert(END, directory)
         self.texture_select.pack(ipadx=PADDING_BUTTON/3, padx=PADDING_BUTTON/3)
 
+        Frame(self.master,height=23).pack()
+
+        self.using_sounds = IntVar()
+        self.using_sounds.set(self.options["Sounds"])
+        self.sounds_check = Checkbutton(self.master, text="Enable Sound Effects", command=self.update_sounds, variable=self.using_sounds)
+        self.sounds_check.pack(ipadx=PADDING_BUTTON/3, padx=PADDING_BUTTON)
+
         Style().configure("Minor.TButton", font=("Lucida", 10))
         self.master.protocol('WM_DELETE_WINDOW', self.close)
         logging.info("Options menu created.")
-        
+
     def close(self):
         self.options["Textures"].pack = self.texture_select.get(ACTIVE) if self.texture_select.get(ACTIVE) != "" else "default" # Because it has no changed event
         logging.info("Selected Texture Pack: {}".format(self.options["Textures"].pack))
         self.master.destroy()
+
+    def update_sounds(self):
+        self.options["Sounds"] = self.using_sounds.get()
 
     def update_difficulty(self, event):
         self.options["Difficulty"] = int(self.difficulty_scale.get())
