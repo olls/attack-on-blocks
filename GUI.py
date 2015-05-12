@@ -82,7 +82,7 @@ class Options_Window:
         self.difficulty_title = Label(self.master)
         self.difficulty_title.config(text="Current Difficulty: {}".format(self.options["Difficulty"]), font=("Courier New", 13))
         self.difficulty_title.pack(ipadx=PADDING_BUTTON/3, padx=PADDING_BUTTON)
-        self.difficulty_scale = Scale(self.master, from_=5, to=500, orient="horizontal", command=self.update_difficulty, length=450)
+        self.difficulty_scale = Scale(self.master, from_=5, to=500, orient="horizontal", command=self.update_difficulty, length=350)
         self.difficulty_scale.pack(ipadx=PADDING_BUTTON/3, padx=PADDING_BUTTON/3)
         self.difficulty_scale["value"] = self.options["Difficulty"]
 
