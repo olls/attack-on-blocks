@@ -58,7 +58,8 @@ def generate_targets(player):
             temp = Target(x=j,y=i, textures=player.options["Textures"])
             sprite_list.append(temp)
             del temp
-
+    if len(sprite_list) > level.firebacks:
+        level.firebacks = len(sprite_list)
     for i in range(level.firebacks):
         changed = False
         while not changed:
