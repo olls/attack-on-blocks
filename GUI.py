@@ -38,8 +38,8 @@ class Main_Window:
         self.exit_button.pack(ipadx=PADDING_BUTTON/3, ipady=PADDING_BUTTON, padx=PADDING_BUTTON, pady=PADDING_BUTTON)
         self.exit_button.bind('<Button-1>', self.close)
 
-        Style().configure("Menu.TButton", font=("Lucida", 25))
-        Style().configure("Quit.TButton", font=("Lucida", 15))
+        Style().configure("Menu.TButton", font=("Lucida", 21))
+        Style().configure("Quit.TButton", font=("Lucida", 13))
 
         self.options_window = Options_Window()
         logging.debug("GUI Generated.")
