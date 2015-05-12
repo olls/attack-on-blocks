@@ -28,12 +28,11 @@ def update_lives(window, lives, colour=HUD_COLOUR):
 def initialise(menu, options):
     pygame.mixer.pre_init(44100, -16, 2, 2048)
     pygame.init()
-    init_sounds()
     window = pygame.display.set_mode(WINDOW_SIZE)
 
     exit_code = play(window, options) # Run main game loop
     for key, value in Sounds.items():
-        value.stop()
+        value.fadeout(500)
 
     logging.debug("Game Exited with code {}".format(exit_code))
     if exit_code != "QUIT": sleep(1)
