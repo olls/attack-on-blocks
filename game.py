@@ -62,7 +62,7 @@ def generate_targets(player):
     for i in range(level.firebacks):
         changed = False
         while not changed:
-            index = randint(0, len(sprite_list)-1) if len(sprite_list) - 1 != 0 else 0
+            index = randint(0, len(sprite_list)-1) if (len(sprite_list) - 1 != 0) else 0
             if sprite_list[index].type != "SHOOTER":
                 sprite_list[index].type = "SHOOTER"
                 sprite_list[index].image = pygame.transform.scale(player.options["Textures"].get_texture("SHOOTER"), (sprite_list[index].width, sprite_list[index].height))
