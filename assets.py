@@ -51,7 +51,7 @@ Levels = [
 
 def generate_random_level():
     logging.info("Generating a random level!")
-    rows = randint(0, 12)
+    rows = randint(1, 12)
     padding = randint(0, 30)
     firebacks = randint(0, 15)
     powerups = randint(0, 15)
