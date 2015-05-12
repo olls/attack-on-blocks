@@ -57,7 +57,7 @@ def play(window, options):
     FPS = player.options["Difficulty"]
 
     timeouts = {
-        "Target Movement":[FPS*0.5,FPS*0.5], 
+        "Target Movement":[FPS*0.75,FPS*0.75], 
         "Powerup":[FPS*100, FPS*100]
     }
     init_sounds()
