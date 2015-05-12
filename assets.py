@@ -44,8 +44,12 @@ class Textures():
 Level_Template = namedtuple('Level_Template', ("rows", "padding", "firebacks", "powerups"))
 Levels = [
     Level_Template(2, 20, 0, 0),
+    Level_Template(3, 15, 1, 0),
+    Level_Template(4, 15, 3, 1),
+    Level_Template(3, 7, 2, 2),
+    Level_Template(5, 15, 2, 1),
+    Level_Template(1, 7, 20, 0),
     Level_Template(3, 15, 2, 1),
-    Level_Template(4, 25, 7, 1)
 ]
 
 
