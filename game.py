@@ -75,8 +75,8 @@ def play(window, options):
                 return "QUIT"
 
             if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
+                if not player.options["Sounds"]: Sounds["shot"].play()
                 temp = Bullet(player, player.options["Textures"])
-                Sounds["shot"].play()
                 bullet_group.add(temp)
 
             if event.type == pygame.KEYDOWN and event.key == pygame.K_KP_PLUS:
