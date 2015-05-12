@@ -39,7 +39,7 @@ class Main_Window:
         self.exit_button.bind('<Button-1>', self.close)
 
         Style().configure("Menu.TButton", font=("Lucida", 21))
-        Style().configure("About.TButton", font=("Lucida", 13))
+        Style().configure("About.TButton", font=("Lucida", 17))
         Style().configure("Quit.TButton", font=("Lucida", 13))
 
         self.options_window = Options_Window()
