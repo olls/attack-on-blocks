@@ -154,11 +154,13 @@ def play(window, options):
 
         if len(target_group) == 0: #If all current players are gone.
             player.level += 1
+            Sounds["main"].set_volume(0.5)
             target_group = generate_targets(player, WINDOW_SIZE, Levels)
             target_group.draw(window)
             bullet_group.empty()
             pygame.display.update()
-            sleep(1.5)
+            sleep(0.75)
+            Sounds["main"].set_volume(1.0)
 
         if player.OP:
             player.change_colour((255,96,0)) #override colour change if changed before

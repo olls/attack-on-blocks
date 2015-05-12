@@ -67,6 +67,9 @@ def init_sounds():
     music_files = ["main.wav", "OP.wav", "shot.wav"]
     for file in music_files:
         path = os.path.dirname(os.path.realpath(__file__)) + "\\resources\\sounds\\" + file
-        mixer = pygame.mixer.Sound(path)
+        if file == "main.wav":
+            mixer = pygame.mixer.music
+            mixer.load(path)
+        else: mixer = pygame.mixer.Sound(path)
         mixer.set_volume(1.0)
         Sounds[file.replace(".wav", "")] = mixer
