@@ -10,19 +10,20 @@ from target import Target, generate_targets
 
 PLAYING_GAME = False
 WINDOW_SIZE = (680, 790)
+HUD_COLOUR = (255,168,72)
 
 
-def update_score(window, score):
+def update_score(window, score, colour=HUD_COLOUR):
     font = pygame.font.SysFont(None, 30, bold=False)
-    window.blit(font.render("Score: {}".format(int(score)), True, (255,0,0)), (25, WINDOW_SIZE[1] - 30))
+    window.blit(font.render("Score: {}".format(int(score)), True, colour), (25, WINDOW_SIZE[1] - 30))
 
-def update_level(window, level):
-    font = pygame.font.SysFont(None, 25, bold=True)
-    window.blit(font.render("Level: {}".format(int(level)+1), True, (0,255,0)), (8.7*WINDOW_SIZE[0]/10, WINDOW_SIZE[1] - 30))
-
-def update_lives(window, lives):
+def update_level(window, level, colour=HUD_COLOUR):
     font = pygame.font.SysFont(None, 30, bold=False)
-    window.blit(font.render("Lives Remaining: {}".format(int(lives)), True, (0,0,255)), (4.5*WINDOW_SIZE[0]/10, WINDOW_SIZE[1] - 30))
+    window.blit(font.render("Level: {}".format(int(level)+1), True, colour), (8.5*WINDOW_SIZE[0]/10, WINDOW_SIZE[1] - 30))
+
+def update_lives(window, lives, colour=HUD_COLOUR):
+    font = pygame.font.SysFont(None, 30, bold=False)
+    window.blit(font.render("Lives Remaining: {}".format(int(lives)), True, colour if lives != 0 else (255,50,0)), (3.8*WINDOW_SIZE[0]/10, WINDOW_SIZE[1] - 30))
 
 def initialise(menu, options):
     pygame.mixer.pre_init(44100, -16, 2, 2048)
