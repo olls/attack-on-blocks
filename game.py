@@ -80,9 +80,10 @@ def play(window, options):
                 bullet_group.add(temp)
 
             if event.type == pygame.KEYDOWN and event.key == pygame.K_KP_PLUS:
-                player.OP = True
-                Sounds["main"].stop()
-                Sounds["OP"].play(loops=-1)
+                if not player.options["Sounds"] or not player.OP: 
+                    Sounds["main"].stop()
+                    Sounds["OP"].play(loops=-1)
+                    player.OP = True
 
         keys = pygame.key.get_pressed()
         if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
