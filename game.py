@@ -86,6 +86,7 @@ def play(window, options):
                     Sounds["main"].stop()
                     Sounds["OP"].play(loops=-1)
                     player.OP = True
+                else: Sounds["OP"].stop()
 
         keys = pygame.key.get_pressed()
         if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
