@@ -23,7 +23,7 @@ def update_level(window, level, colour=HUD_COLOUR):
 
 def update_lives(window, lives, colour=HUD_COLOUR):
     font = pygame.font.SysFont(None, 30, bold=False)
-    window.blit(font.render("Lives Remaining: {}".format(int(lives)), True, colour if lives != 0 else (255,50,0)), (3.8*WINDOW_SIZE[0]/10, WINDOW_SIZE[1] - 30))
+    window.blit(font.render("Lives Remaining: {}".format(int(lives)), True, colour if lives != 1 else (255,50,0)), (3.8*WINDOW_SIZE[0]/10, WINDOW_SIZE[1] - 30))
 
 def initialise(menu, options):
     pygame.mixer.pre_init(44100, -16, 2, 2048)
