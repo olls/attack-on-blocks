@@ -76,7 +76,7 @@ def play(window, options):
                 return "QUIT"
 
             if event.type == pygame.KEYDOWN and event.key in [pygame.K_SPACE, pygame.K_w, pygame.K_UP] and not fired:
-                if not player.options["Sounds"]: Sounds["shot"].play()
+                if player.options["Sounds"]: Sounds["shot"].play()
                 temp = Bullet(player, player.options["Textures"])
                 bullet_group.add(temp)
                 fired = True
