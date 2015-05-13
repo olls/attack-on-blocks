@@ -1,5 +1,6 @@
 import pygame, logging
 from random import randint
+from game import generate_random_level
 
 
 class Target(pygame.sprite.Sprite):
