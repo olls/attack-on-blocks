@@ -107,7 +107,7 @@ class Options_Window:
 
         self.using_sounds = IntVar()
         self.using_sounds.set(self.options["Sounds"])
-        self.sounds_check = Checkbutton(self.master, text="Enable Sound Effects", command=self.update_sounds, variable=self.using_sounds)
+        self.sounds_check = Checkbutton(self.master, text="Use Sound Effects", command=self.update_sounds, variable=self.using_sounds)
         self.sounds_check.pack(ipadx=PADDING_BUTTON/3, padx=PADDING_BUTTON)
 
         Style().configure("Minor.TButton", font=("Lucida", 10))
