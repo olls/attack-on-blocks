@@ -4,7 +4,7 @@ This take on space invaders was written for my IT BTEC course, Unit 21 Games Dev
 
 ### Requirements ###
 
-* Python
+* Python 3
 * Pygame
 * TKinter
 
@@ -12,7 +12,7 @@ The game is only playable on windows, due to the GUI library only being availabl
 
 ### Playing the game ###
 
-* Clone the repository
+* Clone the repository, or visit the downloads page
 * Install the required libraries (See Above)
 * Run 'Play The Game.py'
 
