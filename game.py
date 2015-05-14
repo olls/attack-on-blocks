@@ -86,7 +86,12 @@ def play(window, options):
                     Sounds["main"].stop()
                     Sounds["OP"].play(loops=-1)
                     player.OP = True
-                else: Sounds["OP"].stop()
+                    player.change_colour((255,96,0))
+                elif player.OP:
+                    Sounds["OP"].stop()
+                    Sounds["main"].play(loops=-1)
+                    player.OP = False
+                    player.reset_image()
 
         keys = pygame.key.get_pressed()
         if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
@@ -165,9 +170,6 @@ def play(window, options):
             pygame.display.update()
             sleep(0.75)
             Sounds["main"].set_volume(1.0)
-
-        if player.OP:
-            player.change_colour((255,96,0)) #override colour change if changed before
 
         update_score(window, player.score)
         update_level(window, player.level)
