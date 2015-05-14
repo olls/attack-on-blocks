@@ -4,7 +4,7 @@ This take on space invaders was written for my IT BTEC course, Unit 21 Games Dev
 
 ### More Information ###
 
-For more information, check out the [Wiki](/wiki) page.
+For more information, check out the [Wiki](//bitbucket.org/TheOrangeOne/attack-on-blocks/wiki) page.
 
 ### Requirements ###
 
