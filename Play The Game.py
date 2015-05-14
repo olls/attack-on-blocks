@@ -1,3 +1,3 @@
-print("Starting Space Invaders...\nLoading Main Window...")
+print("Starting Attack on Blocks...\nLoading Main Window...")
 import GUI
 GUI.display()

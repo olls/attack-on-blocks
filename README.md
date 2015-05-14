@@ -1,4 +1,4 @@
-# Space Invaders #
+# Attack on Blocks #
 
 This take on space invaders was written for my IT BTEC course, Unit 21 Games Development at college. This version, written in python, includes more advanced features such as resource packs. 
 

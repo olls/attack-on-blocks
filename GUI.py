@@ -12,10 +12,10 @@ PADDING_BUTTON = 9
 class Main_Window:
     def __init__(self, master):
         self.master = master
-        self.master.title("SPACE INVADERS")
+        self.master.title("ATTACK ON BLOCKS")
 
         self.title = Label(self.master)
-        self.title.config(text="SPACE INVADERS!",font=("Courier New", 37))
+        self.title.config(text="ATTACK ON BLOCKS!",font=("Courier New", 37))
         self.title.pack(side="top", padx=PADDING_BUTTON, pady=PADDING_TITLE/2)
 
         self.start_button = Button(self.master, style="Menu.TButton")
@@ -56,7 +56,7 @@ class Main_Window:
 
     def show_info(self, event):
         logging.info("Loading About Page...")
-        system("start https://bitbucket.org/theorangeone/space-invaders/wiki/Home")
+        system("start https://bitbucket.org/theorangeone/attack-on-blocks/wiki/Home")
 
     def close(self, event):
         logging.critical("Closing Main Window.")
@@ -74,7 +74,7 @@ class Options_Window:
 
     def display(self, master):
         self.master = master
-        self.master.title("SPACE INVADERS - Options")
+        self.master.title("ATTACK ON BLOCKS - Options")
 
         self.title = Label(self.master)
         self.title.config(text="OPTIONS",font=("Courier New", 37))
