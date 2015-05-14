@@ -7,7 +7,8 @@ class Shooter(pygame.sprite.Sprite):
         self.width = width
         self.height = height
         self.colour = colour
-        self.image = pygame.transform.scale(texture.get_texture("PLAYER"), (self.width, self.height))
+        self.texture = texture
+        self.image = pygame.transform.scale(self.texture.get_texture("PLAYER"), (self.width, self.height))
         self.rect = self.image.get_rect()
         self.speed = 3
         self.window_rect = window.get_rect()
@@ -34,3 +35,7 @@ class Shooter(pygame.sprite.Sprite):
         self.image.fill(colour)
         self.rect = self.image.get_rect()
         self.set_position(x,y)
+
+    def reset_image(self):
+    	self.image = pygame.transform.scale(self.texture.get_texture("PLAYER"), (self.width, self.height))
+    	self.rect = self.image.get_rect()
