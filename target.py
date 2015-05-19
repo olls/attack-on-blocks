@@ -8,11 +8,14 @@ class Target(pygame.sprite.Sprite):
         super().__init__()
         self.width = width
         self.height = height
-        self.image = pygame.transform.scale(textures.get_target_texture(), (self.width, self.height))
+        self.textures = textures
+        self.default_texture = textures.get_target_texture()
+        self.image = pygame.transform.scale(self.default_texture[0], (self.width, self.height))
         self.rect = self.image.get_rect()
         self.speed = 5
         self.rect.x, self.rect.y = (x+(self.width/2)),(y+(self.width/2)) # centres co-ordinates
         self.type = "NORMAL"
+        self.lives = 1
         
     def move(self):
         self.rect.x += self.speed
@@ -26,7 +29,6 @@ class Target(pygame.sprite.Sprite):
             self.rect.x, self.rect.y = (x+(self.width/2)),(y+(self.width/2))
         else:
             self.rect.x, self.rect.y = x, y
-
 
 def generate_targets(player, window_size, Levels):
     sprite_list = []
