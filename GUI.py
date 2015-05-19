@@ -7,7 +7,7 @@ from assets import Textures
 
 PADDING_TITLE = 15
 PADDING_BUTTON = 9
-VERSION = {"ID":"2.1", "DATE": "13/05/15 09:31"}
+VERSION = {"ID":"2.2", "DATE": "19/05/15"}
 
 class Main_Window:
     def __init__(self, master):
