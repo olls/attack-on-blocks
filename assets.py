@@ -32,10 +32,14 @@ class Textures():
         filename = self.path + self.pack + "\\{0}.png".format(self.images[objectName.upper()])
         return pygame.image.load(filename)
 
-    def get_target_texture(self):
-        index = randint(0,len(self.images["TARGETS"])-1) if len(self.images["TARGETS"]) >=1 else 0
-        filename = self.path + self.pack + "\\{}.png".format(self.images["TARGETS"][randint(0,len(self.images["TARGETS"])-1)])
-        return pygame.image.load(filename)
+    def get_target_texture(self, ID=False):
+        if not ID:
+            index = randint(0,len(self.images["TARGETS"])-1) if len(self.images["TARGETS"]) >=1 else 0
+            filename = self.path + self.pack + "\\{}.png".format(self.images["TARGETS"][index])
+            return [pygame.image.load(filename), index]
+        else:
+            filename = self.path + self.pack + "\\target{}.png".format(int(ID))
+            return [pygame.image.load(filename), ID]
 
     def list_packs(self):
         return [x[0].replace(self.path, "") for x in os.walk(self.path)]
