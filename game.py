@@ -122,9 +122,11 @@ def play(window, options):
             hit_list = pygame.sprite.spritecollide(bullet, target_group, False)
             for target in hit_list:
                 if bullet.type != "TARGET":
-                    target_group.remove(target)
+                    target.lives -= 1
+                    if target.lives <= 0:           
+                        target_group.remove(target)
+                        player.score += 1
                     bullet_group.remove(bullet)
-                    player.score += 1
                 if target.lives <= 0 and target.type == "POWERUP":
                     player.powerup = POWERUPS[randint(0,len(POWERUPS)-1)]
                     logging.info("Powerup set to {}".format(player.powerup))
