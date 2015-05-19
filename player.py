@@ -37,5 +37,7 @@ class Shooter(pygame.sprite.Sprite):
         self.set_position(x,y)
 
     def reset_image(self):
+    	x,y = self.rect.x, self.rect.y
     	self.image = pygame.transform.scale(self.texture.get_texture("PLAYER"), (self.width, self.height))
     	self.rect = self.image.get_rect()
+    	self.set_position(x,y)
