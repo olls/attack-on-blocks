@@ -7,7 +7,7 @@ from player import Shooter
 from assets import *
 from target import Target, generate_targets
 
-
+POWERUPS = ["SPEED", "DOUBLE", "LIVES", "SCORE", "BIGGER"]
 PLAYING_GAME = False
 WINDOW_SIZE = (680, 790)
 HUD_COLOUR = (255,168,72)
@@ -57,8 +57,8 @@ def play(window, options):
     FPS = player.options["Difficulty"]
 
     timeouts = {
-        "Target Movement":[FPS*0.75,FPS*0.75], 
-        "Powerup":[FPS*100, FPS*100]
+        "Target Movement":[FPS*0.65,FPS*0.65], 
+        "Powerup":[FPS*15, FPS*15]
     }
     init_sounds()
     Sounds["main"].play(loops=-1) #Start background music
@@ -77,14 +77,18 @@ def play(window, options):
 
             if event.type == pygame.KEYDOWN and event.key in [pygame.K_SPACE, pygame.K_w, pygame.K_UP] and not fired:
                 if player.options["Sounds"]: Sounds["shot"].play()
-                temp = Bullet(player, player.options["Textures"])
+                temp = Bullet(player, player.options["Textures"], player.powerup == "BIGGER")
                 bullet_group.add(temp)
+                if player.powerup == "DOUBLE":
+                    temp = Bullet(player, player.options["Textures"], player.powerup == "BIGGER")
+                    temp.rect.y += 20
+                    bullet_group.add(temp)
                 fired = True
 
             if event.type == pygame.KEYDOWN and event.key == pygame.K_KP_PLUS:
                 if not player.options["Sounds"] or not player.OP: 
                     Sounds["main"].stop()
-                    Sounds["OP"].play(loops=-1)
+                    #Sounds["OP"].play(loops=-1)
                     player.OP = True
                     player.change_colour((255,96,0))
                 elif player.OP:
@@ -121,6 +125,9 @@ def play(window, options):
                     target_group.remove(target)
                     bullet_group.remove(bullet)
                     player.score += 1
+                if target.lives <= 0 and target.type == "POWERUP":
+                    player.powerup = POWERUPS[randint(0,len(POWERUPS)-1)]
+                    logging.info("Powerup set to {}".format(player.powerup))
 
             hit_list = pygame.sprite.spritecollide(bullet, player_group, False)
             for player in hit_list:
@@ -149,10 +156,20 @@ def play(window, options):
 
             timeouts["Target Movement"][0] = timeouts["Target Movement"][1]
 
+        if timeouts["Powerup"][0] <= 0:
+            timeouts["Powerup"][0] = timeouts["Powerup"][1]
+
+        if player.powerup == "SCORE":
+            player.score += 10
+            player.powerup = ""
+        elif player.powerup == "LIVES":
+            player.lives += 1
+            player.powerup = ""
+
         for target in target_group:
             if target.type == "SHOOTER":
                 if randint(0,600) > 1: continue
-                temp = Bullet(target, player.options["Textures"])
+                temp = Bullet(target, player.options["Textures"], False)
                 temp.type="TARGET"
                 temp.image = pygame.transform.scale(player.options["Textures"].get_texture("TARGET_BULLET"), (temp.width, temp.height))
                 x,y = temp.rect.x, temp.rect.y

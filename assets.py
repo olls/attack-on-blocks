@@ -9,7 +9,8 @@ class Textures():
             "BULLET":"bullet",
             "TARGETS":[],
             "SHOOTER":"shooter",
-            "TARGET_BULLET":"bullet_target"
+            "TARGET_BULLET":"bullet_target",
+            "POWERUP": "powerup"
         }
         self.path=os.path.dirname(os.path.realpath(__file__)) + "\\resources\\texture_packs\\"
         self.pack = "default"

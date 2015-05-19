@@ -52,7 +52,23 @@ def generate_targets(player, window_size, Levels):
             index = randint(0, len(sprite_list)-1) if (len(sprite_list) - 1 != 0) else 0
             if sprite_list[index].type != "SHOOTER":
                 sprite_list[index].type = "SHOOTER"
+                sprite_list[index].lives = 2
                 sprite_list[index].image = pygame.transform.scale(player.options["Textures"].get_texture("SHOOTER"), (sprite_list[index].width, sprite_list[index].height))
+                x,y = sprite_list[index].rect.x, sprite_list[index].rect.y
+                sprite_list[index].rect = sprite_list[index].image.get_rect()
+                sprite_list[index].set_position(x,y, center=False) #Already Centered!
+                changed = True
+
+    if len(sprite_list) < level.powerups:
+        powerups = len(sprite_list)
+    else: powerups = level.powerups
+    for i in range(powerups):
+        changed = False
+        while not changed:
+            index = randint(0, len(sprite_list)-1) if (len(sprite_list) - 1 != 0) else 0
+            if sprite_list[index].type != "POWERUP" and sprite_list[index].type != "SHOOTER" :
+                sprite_list[index].type = "POWERUP"
+                sprite_list[index].image = pygame.transform.scale(player.options["Textures"].get_texture("POWERUP"), (sprite_list[index].width, sprite_list[index].height))
                 x,y = sprite_list[index].rect.x, sprite_list[index].rect.y
                 sprite_list[index].rect = sprite_list[index].image.get_rect()
                 sprite_list[index].set_position(x,y, center=False) #Already Centered!
