@@ -7,7 +7,7 @@ from assets import Textures
 
 PADDING_TITLE = 15
 PADDING_BUTTON = 9
-
+VERSION = {"ID":"2.1", "DATE": "13/05/15 09:31"}
 
 class Main_Window:
     def __init__(self, master):
@@ -17,6 +17,10 @@ class Main_Window:
         self.title = Label(self.master)
         self.title.config(text="ATTACK ON BLOCKS!",font=("Courier New", 37))
         self.title.pack(side="top", padx=PADDING_BUTTON, pady=PADDING_TITLE/2)
+
+        self.version_info = Label(self.master)
+        self.version_info.config(text="Version {ID} tagged {DATE}".format(**VERSION), font=("Courier New", 15))
+        self.version_info.pack(side="top", padx=PADDING_BUTTON, pady=PADDING_BUTTON/2)
 
         self.start_button = Button(self.master, style="Menu.TButton")
         self.start_button.config(text="Play Game")
