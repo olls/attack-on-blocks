@@ -53,8 +53,11 @@ Levels = [
     Level_Template(4, 15, 3, 1),
     Level_Template(3, 7, 2, 2),
     Level_Template(5, 15, 2, 1),
-    Level_Template(1, 20, 100, 0), #All the enemies!
+    Level_Template(2, 20, 100, 2), #All the enemies!
     Level_Template(3, 15, 2, 1),
+    Level_Template(3, 7, 2, 4),
+    Level_Template(4, 15, 4, 3),
+    Level_Template(5, 35, 4, 6),
 ]
 
 
