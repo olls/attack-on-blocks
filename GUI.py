@@ -42,6 +42,11 @@ class Main_Window:
         self.exit_button.pack(ipadx=PADDING_BUTTON/3, ipady=PADDING_BUTTON, padx=PADDING_BUTTON, pady=PADDING_BUTTON)
         self.exit_button.bind('<Button-1>', self.close)
 
+        self.about_info = Label(self.master)
+        self.about_info.config(text="Game Created by TheOrangeOne!", font=("Courier New", 14))
+        self.about_info.bind("<Button-1>", self.show_site)
+        self.about_info.pack(side="top", padx=PADDING_BUTTON, pady=PADDING_BUTTON/2)
+
         Style().configure("Menu.TButton", font=("Lucida", 21))
         Style().configure("About.TButton", font=("Lucida", 17))
         Style().configure("Quit.TButton", font=("Lucida", 13))
@@ -66,6 +71,9 @@ class Main_Window:
         logging.critical("Closing Main Window.")
         self.master.destroy()
 
+    def show_site(self, event):
+        logging.info("Loading Website")
+        system("start http://theorangeone.net")
 
 class Options_Window:
     def __init__(self):
