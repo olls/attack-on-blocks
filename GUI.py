@@ -19,7 +19,7 @@ class Main_Window:
         self.title.pack(side="top", padx=PADDING_BUTTON, pady=PADDING_TITLE/2)
 
         self.version_info = Label(self.master)
-        self.version_info.config(text="Version {ID} tagged {DATE}".format(**VERSION), font=("Courier New", 15))
+        self.version_info.config(text="Version {ID} tagged {DATE}".format(**VERSION), font=("Courier New", 13))
         self.version_info.pack(side="top", padx=PADDING_BUTTON, pady=PADDING_BUTTON/2)
 
         self.start_button = Button(self.master, style="Menu.TButton")
@@ -43,7 +43,7 @@ class Main_Window:
         self.exit_button.bind('<Button-1>', self.close)
 
         self.about_info = Label(self.master)
-        self.about_info.config(text="Game Created by TheOrangeOne!", font=("Courier New", 14))
+        self.about_info.config(text="Game Created by TheOrangeOne!", font=("Courier New", 9))
         self.about_info.bind("<Button-1>", self.show_site)
         self.about_info.pack(side="top", padx=PADDING_BUTTON, pady=PADDING_BUTTON/2)
 
