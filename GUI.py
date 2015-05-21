@@ -16,11 +16,11 @@ class Main_Window:
 
         self.title = Label(self.master)
         self.title.config(text="ATTACK ON BLOCKS!",font=("Courier New", 37))
-        self.title.pack(side="top", padx=PADDING_BUTTON, pady=PADDING_TITLE/2)
+        self.title.pack(side="top", padx=PADDING_TITLE, pady=PADDING_TITLE/2)
 
         self.version_info = Label(self.master)
         self.version_info.config(text="Version {ID} tagged {DATE}".format(**VERSION), font=("Courier New", 13))
-        self.version_info.pack(side="top", padx=PADDING_BUTTON, pady=PADDING_BUTTON/2)
+        self.version_info.pack(side="top", padx=0, pady=PADDING_BUTTON/2)
 
         self.start_button = Button(self.master, style="Menu.TButton")
         self.start_button.config(text="Play Game")
@@ -45,7 +45,7 @@ class Main_Window:
         self.about_info = Label(self.master)
         self.about_info.config(text="Game Created by TheOrangeOne!", font=("Courier New", 9))
         self.about_info.bind("<Button-1>", self.show_site)
-        self.about_info.pack(side="top", padx=PADDING_BUTTON, pady=PADDING_BUTTON/2)
+        self.about_info.pack(side="top", padx=0, pady=PADDING_BUTTON/2)
 
         Style().configure("Menu.TButton", font=("Lucida", 21))
         Style().configure("About.TButton", font=("Lucida", 17))
