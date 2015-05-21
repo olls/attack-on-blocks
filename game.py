@@ -88,7 +88,7 @@ def play(window, options):
             if event.type == pygame.KEYDOWN and event.key == pygame.K_KP_PLUS:
                 if not player.options["Sounds"] or not player.OP: 
                     Sounds["main"].stop()
-                    #Sounds["OP"].play(loops=-1)
+                    Sounds["OP"].play(loops=-1)
                     player.OP = True
                     player.change_colour((255,96,0))
                 elif player.OP:
