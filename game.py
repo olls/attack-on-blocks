@@ -29,7 +29,7 @@ def initialise(menu, options):
     pygame.mixer.pre_init(44100, -16, 2, 2048)
     pygame.init()
     window = pygame.display.set_mode(WINDOW_SIZE)
-
+    pygame.display.set_caption("Attack on Blocks")
     exit_code = play(window, options) # Run main game loop
     for key, value in Sounds.items():
         value.fadeout(500)
