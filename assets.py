@@ -72,12 +72,12 @@ def generate_random_level():
 
 Sounds = {}
 def init_sounds():
-    music_files = ["main.wav", "OP.wav", "shot.wav"]
+    music_files = ["main.ogg", "OP.ogg", "shot.ogg"]
     for file in music_files:
         path = os.path.dirname(os.path.realpath(__file__)) + "\\resources\\sounds\\" + file
-        if file == "main.wav":
+        if file == "main.ogg":
             mixer = pygame.mixer.music
             mixer.load(path)
         else: mixer = pygame.mixer.Sound(path)
         mixer.set_volume(1.0)
-        Sounds[file.replace(".wav", "")] = mixer
+        Sounds[file.replace(".ogg", "")] = mixer
