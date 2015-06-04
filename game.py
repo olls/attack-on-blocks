@@ -61,7 +61,7 @@ def play(window, options):
         "Powerup":[FPS*15, FPS*15]
     }
     init_sounds()
-    Sounds["main"].play(loops=-1) #Start background music
+    if options["Sounds"]: Sounds["main"].play(loops=-1) #Start background music
 
     logging.info("Game Started.")
     PLAYING_GAME = True
