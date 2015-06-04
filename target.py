@@ -49,8 +49,10 @@ def generate_targets(player, window_size, Levels):
         firebacks = len(sprite_list)
     else: firebacks = level.firebacks
     for i in range(firebacks):
+        loop = 0
         changed = False
         while not changed:
+            if loop == firebacks: changed = True
             index = randint(0, len(sprite_list)-1) if (len(sprite_list) - 1 != 0) else 0
             if sprite_list[index].type != "SHOOTER":
                 sprite_list[index].type = "SHOOTER"
@@ -60,6 +62,7 @@ def generate_targets(player, window_size, Levels):
                 sprite_list[index].rect = sprite_list[index].image.get_rect()
                 sprite_list[index].set_position(x,y, center=False) #Already Centered!
                 changed = True
+            loop += 1
 
     if len(sprite_list) < level.powerups:
         powerups = len(sprite_list)
