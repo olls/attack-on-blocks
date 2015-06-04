@@ -107,7 +107,7 @@ def play(window, options):
             else: player.move(-player.speed)
 
         if keys[pygame.K_KP4] and keys[pygame.K_KP5] and keys[pygame.K_KP6] and player.OP:
-            temp = Bullet(player, player.options["Textures"])
+            temp = Bullet(player, player.options["Textures"], False)
             bullet_group.add(temp)
 
         if keys[pygame.K_r] and [pygame.K_9] and [pygame.K_k] and player.OP:
