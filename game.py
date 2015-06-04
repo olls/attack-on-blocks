@@ -84,18 +84,7 @@ def play(window, options):
                     temp.rect.y += 20
                     bullet_group.add(temp)
                 fired = True
-
-            if event.type == pygame.KEYDOWN and event.key == pygame.K_KP_PLUS:
-                if not player.options["Sounds"] or not player.OP: 
-                    Sounds["main"].stop()
-                    Sounds["OP"].play(loops=-1)
-                    player.OP = True
-                    player.change_colour((255,96,0))
-                elif player.OP:
-                    Sounds["OP"].stop()
-                    Sounds["main"].play(loops=-1)
-                    player.OP = False
-                    player.reset_image()
+                
 
         keys = pygame.key.get_pressed()
         if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
@@ -112,6 +101,22 @@ def play(window, options):
 
         if keys[pygame.K_r] and [pygame.K_9] and [pygame.K_k] and player.OP:
             eggs.r9k(window)
+
+        if keys[pygame.K_KP4] and keys[pygame.K_KP2] and keys[pygame.K_KP0] and keys[pygame.K_o] and keys[pygame.K_p] and not player.OP:
+            if player.options["Sounds"]:
+                Sounds["main"].stop()
+                Sounds["OP"].play(loops=-1)
+            player.OP = True
+            player.change_colour((255,96,0))
+            logging.warn("OP mode engaged.")
+                   
+        if keys[pygame.K_KP_MINUS] and player.OP:
+            if player.options["Sounds"]:
+                Sounds["OP"].stop()
+                Sounds["main"].play(loops=-1)
+            player.OP = False
+            player.reset_image()
+            logging.warn("OP mode disabled.")
 
         for sprite in bullet_group:
             sprite.update()
