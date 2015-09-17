@@ -12,37 +12,37 @@ class Textures():
             "TARGET_BULLET":"bullet_target",
             "POWERUP": "powerup"
         }
-        self.path=os.path.dirname(os.path.realpath(__file__)) + "\\resources\\texture_packs\\"
+        self.path = os.path.join(os.getcwd(), "resources", "texture_packs")
         self.pack = "default"
 
     def load_texture_pack(self, pack_name):
-        if os.path.exists(self.path + pack_name):
+        if os.path.exists(os.path.join(self.path, pack_name)):
             self.images["TARGETS"] = []
 
-            targets = glob.glob(self.path+pack_name+"\\target*.png")
+            targets = glob.glob(os.path.join(self.path, pack_name, "target*.png"))
             logging.debug("Found {0} target files.".format(len(targets)))
-            for file in targets:
-                filename = file.split("\\")[-1].replace(".png", "")
+            for file_ in targets:
+                filename = file_.split(os.sep)[-1].replace(".png", "")
                 self.images["TARGETS"].append(filename)
 
             self.pack = pack_name
-        else: logging.warn("Cannot find texture pack '{}'".format(ppack_name))
+        else: logging.warn("Cannot find texture pack '{}'".format(pack_name))
 
     def get_texture(self, objectName):
-        filename = self.path + self.pack + "\\{0}.png".format(self.images[objectName.upper()])
+        filename = os.path.join(self.path, self.pack, "{0}.png".format(self.images[objectName.upper()]))
         return pygame.image.load(filename)
 
     def get_target_texture(self, ID=False):
         if not ID:
             index = randint(0,len(self.images["TARGETS"])-1) if len(self.images["TARGETS"]) >=1 else 0
-            filename = self.path + self.pack + "\\{}.png".format(self.images["TARGETS"][index])
+            filename = os.path.join(self.path, self.pack, "{}.png".format(self.images["TARGETS"][index]))
             return [pygame.image.load(filename), index]
         else:
-            filename = self.path + self.pack + "\\target{}.png".format(int(ID))
+            filename = os.path.join(self.path, self.pack, "target{}.png".format(int(ID)))
             return [pygame.image.load(filename), ID]
 
     def list_packs(self):
-        return [x[0].replace(self.path, "") for x in os.walk(self.path)]
+        return [os.path.relpath(x[0], self.path) for x in os.walk(self.path) if os.path.samefile(x[0], self.path)]
 
 
 
@@ -73,11 +73,11 @@ def generate_random_level():
 Sounds = {}
 def init_sounds():
     music_files = ["main.ogg", "OP.ogg", "shot.ogg"]
-    for file in music_files:
-        path = os.path.dirname(os.path.realpath(__file__)) + "\\resources\\sounds\\" + file
-        if file == "main.ogg":
+    for file_ in music_files:
+        path = os.path.join(os.getcwd(), "resources", "sounds", file_)
+        if file_ == "main.ogg":
             mixer = pygame.mixer.music
             mixer.load(path)
         else: mixer = pygame.mixer.Sound(path)
         mixer.set_volume(1.0)
-        Sounds[file.replace(".ogg", "")] = mixer
+        Sounds[file_.replace(".ogg", "")] = mixer
