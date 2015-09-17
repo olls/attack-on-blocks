@@ -1,7 +1,7 @@
 from tkinter import *
 from tkinter.ttk import *
 import logging
-from os import system
+import webbrowser
 import game
 from assets import Textures
 
@@ -65,7 +65,7 @@ class Main_Window:
 
     def show_info(self, event):
         logging.info("Loading About Page...")
-        system("start https://bitbucket.org/theorangeone/attack-on-blocks/wiki/Home")
+        webbrowser.open("https://bitbucket.org/theorangeone/attack-on-blocks/wiki/Home")
 
     def close(self, event):
         logging.critical("Closing Main Window.")
@@ -73,7 +73,7 @@ class Main_Window:
 
     def show_site(self, event):
         logging.info("Loading Website")
-        system("start http://theorangeone.net")
+        webbrowser.open("http://theorangeone.net")
 
 class Options_Window:
     def __init__(self):
